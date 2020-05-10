@@ -4,7 +4,6 @@ namespace FilamentCalculator.Models
     {
         public int TypeID { get; set; }
         public string Name { get; set; }
-        
-        
+        public string Usage { get; set; }
     }
 }
