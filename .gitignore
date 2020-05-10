@@ -395,3 +395,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/code,kate,rider,linux,windows,aspnetcore
+
+.vscode/
