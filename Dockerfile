@@ -8,10 +8,11 @@ RUN dotnet restore
 
 # copy and publish app and libraries
 COPY . .
+RUN dotnet restore
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/core/runtime:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "FilamentCalculator.dll"]
