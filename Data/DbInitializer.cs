@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FilamentCalculator.Models;
 
 namespace FilamentCalculator.Data
 {
@@ -10,11 +11,24 @@ namespace FilamentCalculator.Data
             context.Database.EnsureCreated();
 
             // Look for any students.
-            if (context.Filaments.Any())
+            if (context.FilamentTypes.Any())
             {
                 return; // DB has been seeded
             }
-            
+
+            var FilamentTypes = new FilamentType[]
+            {
+                new FilamentType{Name = "PLA"},
+                new FilamentType{Name = "PETG"},
+                new FilamentType{Name = "ASA"},
+            };
+            foreach (var filamentType in FilamentTypes)
+            {
+                context.FilamentTypes.Add(filamentType);
+            }
+
+            context.SaveChanges();
+
         }
     }
 }

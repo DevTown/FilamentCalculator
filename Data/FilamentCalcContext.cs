@@ -13,12 +13,24 @@ namespace FilamentCalculator.Data
 {
     public class FilamentCalcContext : DbContext
     {
+        public FilamentCalcContext(DbContextOptions<FilamentCalcContext> options) : base(options)
+        {
+            var path = Environment.GetEnvironmentVariable("PATH");
+            Console.WriteLine(path);
+        }
+        
         private static string MyHost => Environment.GetEnvironmentVariable("PGHostname");
+
         private static string MyDb => Environment.GetEnvironmentVariable("PGDB");
+
         private static string MyUser => Environment.GetEnvironmentVariable("PGUsername");
+
         private static string MyPw => Environment.GetEnvironmentVariable("PGPassword");
 
+
         public DbSet<Filament> Filaments { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<FilamentType> FilamentTypes { get; set; }
         
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
