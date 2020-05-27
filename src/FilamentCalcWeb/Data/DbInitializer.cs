@@ -38,11 +38,11 @@ namespace FilamentCalculator.Data
 
                 var ManufactorList = new Manufacturer[]
                 {
-                    new Manufacturer{Name = "Material4Print",Url = "https://material4print.de"},
-                    new Manufacturer{Name= "DasFilament"},
-                    new Manufacturer{Name= "RedLine"},
-                    new Manufacturer{Name= "Extrudr"},
-                    new Manufacturer{Name= "Bavaria Filament"},
+                    new Manufacturer {Name = "Material4Print", Url = "https://material4print.de"},
+                    new Manufacturer {Name = "DasFilament"},
+                    new Manufacturer {Name = "RedLine"},
+                    new Manufacturer {Name = "Extrudr"},
+                    new Manufacturer {Name = "Bavaria Filament"},
                 };
 
                 foreach (var item in ManufactorList)
@@ -51,10 +51,13 @@ namespace FilamentCalculator.Data
                 }
 
                 context.SaveChanges();
-                
+            }
+            
+            if(Environment.GetEnvironmentVariable("SeedDemoData")?.ToUpper() == "J")
+            {
                 var FilamentList = new Filament[]
                 {
-                    new Filament{Diameter = 1.75f, Color = "Black", ManufacturerId = 1, Price = 17.0f, FilamentTypeId = 0, SpoolWeight = 800f, PrintTempBed = "0 - 60 °C", PrintTempNozzle = "205 - 230 °C"}, 
+                    new Filament{Diameter = 1.75f, Color = "Black", ManufacturerId = 2, Price = 17.0f, FilamentTypeId = 1, SpoolWeight = 800f, PrintTempBed = "0 - 60 °C", PrintTempNozzle = "205 - 230 °C"}, 
                 };
 
                 foreach (var item in FilamentList)
@@ -64,8 +67,6 @@ namespace FilamentCalculator.Data
 
                 context.SaveChanges();
             }
-            
-
         }
     }
 }

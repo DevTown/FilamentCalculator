@@ -1,0 +1,44 @@
+@model IEnumerable<Filament>
+
+@{
+    ViewData["Title"] = "Filaments";
+}
+
+<table>
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.Manufacturer.Name)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Color)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Diameter)
+    </th>
+    <th>
+            @Html.DisplayNameFor(model => model.SpoolWeight)
+        </th>
+    <th></th>
+</tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diameter)
+        </td>
+        <td>
+                    @Html.DisplayFor(modelItem => item.SpoolWeight)
+                    </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FilamentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FilamentId })
+        </td>
+    </tr>
+}
+</table>

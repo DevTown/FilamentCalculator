@@ -15,10 +15,13 @@ namespace FilamentCalculator.Data
     {
         public FilamentCalcContext(DbContextOptions<FilamentCalcContext> options) : base(options)
         {
-            var path = Environment.GetEnvironmentVariable("PATH");
-            Console.WriteLine(path);
         }
-        
+
+        public FilamentCalcContext():base(new DbContextOptions<FilamentCalcContext>())
+        {
+            
+        }
+
         private static string MyHost => Environment.GetEnvironmentVariable("PGHostname");
 
         private static string MyDb => Environment.GetEnvironmentVariable("PGDB");

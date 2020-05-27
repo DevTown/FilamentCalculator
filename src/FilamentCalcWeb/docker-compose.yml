@@ -18,5 +18,8 @@ services:
       PGDB: filamentcalc
       PGUsername: postgres
       PGPassword: example
+      SeedDemoData: J
     ports:
-      - "54011:80"
+      - "9001:80"
+    depends_on:
+      - "db"
