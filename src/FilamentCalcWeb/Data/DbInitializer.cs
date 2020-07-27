@@ -22,6 +22,7 @@ namespace FilamentCalculator.Data
                     new FilamentType{Name = "PLA", WeightPerMM = 0.002f},
                     new FilamentType{Name = "PETG", WeightPerMM = 0.002f},
                     new FilamentType{Name = "ASA", WeightPerMM = 0.002f},
+                    new FilamentType{Name = "ABS", WeightPerMM = 0.003f},
                 };
                 foreach (var filamentType in FilamentTypes)
                 {
@@ -50,6 +51,25 @@ namespace FilamentCalculator.Data
                     context.Manufacturers.Add(item);
                 }
 
+                context.SaveChanges();
+            }
+
+            {
+                if (context.Settingses.Any())
+                {
+                    return; // DB has been seeded
+                }
+                
+                var setting = new Settings
+                {
+                    Energiekosts = (decimal) 0.24,
+                    MissprintChance = 10,
+                    PrinterEnergyUsageW = 300,
+                    PrinterDepricationKostsPerHour = 5
+                    
+                };
+
+                context.Settingses.Add(setting);
                 context.SaveChanges();
             }
             

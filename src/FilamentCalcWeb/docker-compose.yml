@@ -19,6 +19,7 @@ services:
       PGUsername: postgres
       PGPassword: example
       SeedDemoData: J
+      ASPNETCORE_ENVIRONMENT: Development
     ports:
       - "9001:80"
     depends_on:

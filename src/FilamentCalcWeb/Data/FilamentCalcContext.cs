@@ -35,6 +35,8 @@ namespace FilamentCalculator.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<FilamentType> FilamentTypes { get; set; }
         
+        public DbSet<Settings> Settingses { get; set; }
+        
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");

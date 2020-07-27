@@ -4,8 +4,11 @@
 }
 
 <div class="text-center">
-   @foreach (var item in Model.Filaments)
-   {
-       <p>@item.Manufacturer.Name  || @item.FilamentType.Name || @item.Color </p><br/>
-   }
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        @Html.DropDownListFor(o => o.Filamenttypes, new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name)))
+        
+        
+        <button type="submit">Berechnen</button>
+    }
 </div>

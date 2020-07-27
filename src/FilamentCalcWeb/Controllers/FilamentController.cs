@@ -39,6 +39,16 @@ namespace FilamentCalculator.Controllers
 
         public IActionResult Edit(int? id)
         {
+            if (id == null) return RedirectToAction(nameof(Index));
+            
+            var item = new FilamentViewModel(id.Value);
+            
+            return View(item);
+        }
+        
+        [HttpPost]
+        public IActionResult Edit(FilamentViewModel model)
+        {
             return RedirectToAction(nameof(Index));
         }
     }
