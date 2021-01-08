@@ -1,6 +1,11 @@
 # FilamentCalculator
 
-This is a smale WebApp to calc the cost of a printed part with a 3D-Printer.  
+This is a smale WebApp to calc the cost of a printed part for 3D-Printers.
+
+You can manage your filaments, manufacturer and more.
+
+The calculator is wrtitten in ASP.NET CORE 3.1 and uses Docker for its deployment. 
+
 
 Exampl Docker-Compose:
 
