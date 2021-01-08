@@ -51,5 +51,11 @@ namespace FilamentCalculator.Controllers
         {
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Add()
+        {
+            var filamenttypes =  _db.FilamentTypes.ToList();
+            return View(filamenttypes);
+        }
     }
 }
