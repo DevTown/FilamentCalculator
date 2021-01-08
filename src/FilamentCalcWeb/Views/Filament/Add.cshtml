@@ -5,9 +5,10 @@
 }
 
 <h2>Filament Hinzufügen</h2>
-@using (Html.BeginForm("Edit", "Filament", FormMethod.Post))
+@using (Html.BeginForm("Add", "Filament", FormMethod.Post))
 {
-    @Html.EditorFor( o => o.Filament)
-    @Html.DropDownListFor(o => o.Filament.Manufacturer,new SelectList(Model.Manufacturers, nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name)) )
+  //  @Html.EditorFor( o => o.Filament)
+   // @Html.DropDownListFor(o => o.Filament.Manufacturer,new SelectList(Model.Manufacturers, 
+     //   nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name)) )
     <button type="submit">Speichern</button>
 }

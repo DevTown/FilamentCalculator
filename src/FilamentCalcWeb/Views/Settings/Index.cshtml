@@ -1,0 +1,34 @@
+@model SettingsViewModel
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Energiekosts)
+                    @Html.EditorFor(model=>model.Energiekosts)
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MissprintChance)
+                    @Html.EditorFor(model=>model.MissprintChance)
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrinterEnergyUsageW)
+                    @Html.EditorFor(model=>model.PrinterEnergyUsageW)
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrinterDepricationKostsPerHour)
+                    @Html.EditorFor(model=>model.PrinterDepricationKostsPerHour)
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default"/>
+                    </div>
+                </div>
+            </div>
+        }
