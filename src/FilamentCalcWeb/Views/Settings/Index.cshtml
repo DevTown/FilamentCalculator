@@ -1,5 +1,10 @@
 @model SettingsViewModel
 
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @using (Html.BeginForm())
         {
@@ -7,27 +12,27 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Energiekosts)
-                    @Html.EditorFor(model=>model.Energiekosts)
+                    @Html.TextBoxFor(model=>model.Energiekosts,new { @class = "form-control" })
                 </div>
                 
                 <div class="form-group">
                     @Html.LabelFor(model => model.MissprintChance)
-                    @Html.EditorFor(model=>model.MissprintChance)
+                    @Html.TextBoxFor(model=>model.MissprintChance,new { @class = "form-control" })
                 </div>
                 
                 <div class="form-group">
                     @Html.LabelFor(model => model.PrinterEnergyUsageW)
-                    @Html.EditorFor(model=>model.PrinterEnergyUsageW)
+                    @Html.TextBoxFor(model=>model.PrinterEnergyUsageW,new { @class = "form-control" })
                 </div>
                 
                 <div class="form-group">
                     @Html.LabelFor(model => model.PrinterDepricationKostsPerHour)
-                    @Html.EditorFor(model=>model.PrinterDepricationKostsPerHour)
+                    @Html.TextBoxFor(model=>model.PrinterDepricationKostsPerHour,new { @class = "form-control" })
                 </div>
                 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default"/>
+                        <input type="submit" value="Save" class="btn btn-outline-success my-2 my-sm-0"/>
                     </div>
                 </div>
             </div>
