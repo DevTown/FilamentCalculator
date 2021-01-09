@@ -2,6 +2,14 @@ namespace FilamentCalculator.Models
 {
     public class Filament
     {
+        public string Displayname
+        {
+            get
+            {
+                return this.Manufacturer.Name + " - " + this.Color + " - ";
+            }
+        }
+
         public int FilamentId { get; set; }
         public FilamentType FilamentType { get; set; }
         public int FilamentTypeId { get; set; }

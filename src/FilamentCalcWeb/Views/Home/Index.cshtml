@@ -1,15 +1,34 @@
 ﻿@model CalculatorViewModel
 @{
     ViewData["Title"] = "Calculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="text-center">
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
-        @Html.DropDownListFor(o => o.Filamenttypes, new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name)))
+        @Html.DropDownListFor(o => o.Filamenttypes,
+            new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name)))
+        <br>
         
+        @Html.DropDownListFor(o => o.Filaments, 
+            new SelectList(Model.Filaments, nameof(Filament.FilamentTypeId), nameof(Filament.Displayname)))
         
+        <br>
         
-        <button type="submit">Berechnen</button>
+        @Html.LabelFor(model=>model.weight)
+        @Html.EditorFor(model=>model.weight)
+        
+        <br>
+        @Html.LabelFor(model=>model.lengthmm)
+        @Html.EditorFor(model=>model.lengthmm)
+        
+        <br>
+        @Html.LabelFor(model=>model.printtimeh)
+        @Html.EditorFor(model=>model.printtimeh)
+        
+        <br>
+          
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Berechnen</button>
     }
 </div>
