@@ -16,6 +16,16 @@ namespace FilamentCalculator.Controllers
             _logger = logger;
         }
 
+        [HttpPost]
+        public IActionResult Index(CalculatorViewModel viewmodel)
+        {
+            var vm = new CalculatorViewModel();
+            vm = viewmodel;
+            vm.SelectedFilament = viewmodel.SelectedFilament;
+            vm.Calculate();
+            return View(vm);
+        }
+
         public IActionResult Index()
         {
             var calculatorViewModel = new CalculatorViewModel();
