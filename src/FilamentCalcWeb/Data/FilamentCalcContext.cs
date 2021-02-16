@@ -39,6 +39,7 @@ namespace FilamentCalculator.Data
         
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
+            =>optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
+        //optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
     }
 }

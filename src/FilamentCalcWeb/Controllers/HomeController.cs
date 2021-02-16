@@ -19,11 +19,12 @@ namespace FilamentCalculator.Controllers
         [HttpPost]
         public IActionResult Index(CalculatorViewModel viewmodel)
         {
-            var vm = new CalculatorViewModel();
-            vm = viewmodel;
-            vm.SelectedFilament = viewmodel.SelectedFilament;
-            vm.Calculate();
-            return View(vm);
+            if (viewmodel.SelectedFilament>0)
+            {
+                viewmodel.Calculate();
+            }
+            
+            return View(viewmodel);
         }
 
         public IActionResult Index()

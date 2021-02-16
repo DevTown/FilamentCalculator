@@ -18,7 +18,8 @@ namespace FilamentCalculator.Models
         //public IEnumerable<Manufacturer> Manufacturers { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
         
-        public Filament SelectedFilament { get; set; }
+        [Required]
+        public int SelectedFilament { get; set; }
         public Manufacturer Manufacturer { get; set; }
         
         public Settings Settings { get; set; }
@@ -32,10 +33,13 @@ namespace FilamentCalculator.Models
         [Display( Name="printtime of printing object in min")]
         public decimal printtimeh { get; set; }
         
+        [Display( Name="printing costs")]
         public decimal costs { get; private set; }
 
         private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
-        
+        public decimal energyCosts { get; private set; }
+        public decimal filamentCosts { get; private set; }
+
         public CalculatorViewModel()
         {
             this.Filaments =  context.Filaments.Include(nameof(Manufacturer)).ToList();
@@ -46,13 +50,17 @@ namespace FilamentCalculator.Models
 
         public void Calculate()
         {
-            var filcost = (this.Settings.Energiekosts  * 
-                                        (decimal) (this.SelectedFilament.Price / this.SelectedFilament.SpoolWeight)
+            var filcost = (this.weight  * 
+                              (decimal) (this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).Price 
+                                         / this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).SpoolWeight)
                 );
             
-            var energycosts = printtimeh * 
-                              this.Settings.PrinterEnergyUsageW * this.Settings.PrinterDepricationKostsPerHour;
+            var energycosts = (printtimeh / 60) * 
+                              this.Settings.PrinterEnergyUsageW * this.Settings.Energiekosts;
 
+            this.filamentCosts = filcost;
+            this.energyCosts = energycosts;
+            
             this.costs = filcost + energycosts;
             
             var CalcErgText = $"FILAMENTKOSTEN: {filcost.ToString(CultureInfo.GetCultureInfo("DE"))}" +
