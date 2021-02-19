@@ -1,4 +1,4 @@
-@model List<FilamentType>
+@model FilamentViewModel
 
 @{
     ViewBag.Title = "Filament Hinzufügen";
@@ -7,8 +7,29 @@
 <h2>Filament Hinzufügen</h2>
 @using (Html.BeginForm("Add", "Filament", FormMethod.Post))
 {
-  //  @Html.EditorFor( o => o.Filament)
-   // @Html.DropDownListFor(o => o.Filament.Manufacturer,new SelectList(Model.Manufacturers, 
-     //   nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name)) )
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.Diameter)
+        @Html.TextBoxFor( o => o.Filament.Diameter,new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.Color)
+        @Html.TextBoxFor( o => o.Filament.Color,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.Manufacturer)
+        <select asp-for="Filament.Manufacturer.ManufacturerId"
+                asp-items="@new SelectList(Model.Manufacturers, nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name))" class="form-control"></select>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.Price)
+        @Html.TextBoxFor( o => o.Filament.Price,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.SpoolWeight)
+        @Html.TextBoxFor( o => o.Filament.SpoolWeight,new { @class = "form-control" })
+    </div>
     <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Speichern</button>
 }

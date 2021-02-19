@@ -22,7 +22,9 @@ namespace FilamentCalculator.Models
 
         public FilamentViewModel()
         {
-            
+            this.Filament = new Filament();
+            this.Filamenttypes = context.FilamentTypes.ToList();
+            this.Manufacturers = context.Manufacturers.ToList();
         }
     }
 }
