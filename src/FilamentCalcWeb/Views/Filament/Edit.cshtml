@@ -3,6 +3,13 @@
 
 @using (Html.BeginForm("Edit", "Filament", FormMethod.Post))
 {
+    <input type="hidden" asp-for="Filament.FilamentId" />
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.FilamentType)
+        <select asp-for="Filament.FilamentTypeId"
+                asp-items="@new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name))" class="form-control"></select>
+    </div>
+    
     <div class="form-group">
         @Html.LabelFor( o => o.Filament.Diameter)
         @Html.TextBoxFor( o => o.Filament.Diameter,new { @class = "form-control" })
@@ -14,7 +21,7 @@
     
     <div class="form-group">
         @Html.LabelFor( o => o.Filament.Manufacturer)
-        <select asp-for="Filament.Manufacturer.ManufacturerId"
+        <select asp-for="Filament.ManufacturerId"
                 asp-items="@new SelectList(Model.Manufacturers, nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name))" class="form-control"></select>
     </div>
     
