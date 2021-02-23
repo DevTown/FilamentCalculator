@@ -34,6 +34,14 @@
         @Html.LabelFor( o => o.Filament.SpoolWeight)
         @Html.TextBoxFor( o => o.Filament.SpoolWeight,new { @class = "form-control" })
     </div>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.PrintTempBed)
+        @Html.TextBoxFor( o => o.Filament.PrintTempBed,new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Filament.PrintTempNozzle)
+        @Html.TextBoxFor( o => o.Filament.PrintTempNozzle,new { @class = "form-control" })
+    </div>
     
     
     <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Speichern</button>

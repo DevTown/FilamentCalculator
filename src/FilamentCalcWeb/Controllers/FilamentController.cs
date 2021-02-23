@@ -49,26 +49,20 @@ namespace FilamentCalculator.Controllers
         [HttpPost]
         public IActionResult Edit(FilamentViewModel model)
         {
+            if (model.Filament.FilamentId == 0)
+            {
+                _db.Filaments.Add(model.Filament);
+            }
+            else
+            {
+                _db.Filaments.Update(model.Filament);    
+            }
             
-            _db.Filaments.Update(model.Filament);
             _db.SaveChanges();
             
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Add()
-        {
-            var item = new FilamentViewModel();
-            return View(item);
-        }
-        
-        [HttpPost]
-        public IActionResult Add(FilamentViewModel model)
-        {
-            _db.Filaments.Add(model.Filament);
-            _db.SaveChanges();
-            
-            return RedirectToAction(nameof(Index));
-        }
+     
     }
 }
