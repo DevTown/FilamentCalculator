@@ -73,7 +73,7 @@ namespace FilamentCalculator.Data
                 context.SaveChanges();
             }
             
-           // if(Environment.GetEnvironmentVariable("SeedDemoData")?.ToUpper() == "J")
+            if(Environment.GetEnvironmentVariable("SeedDemoData")?.ToUpper() == "J")
             {
                 var FilamentList = new Filament[]
                 {
