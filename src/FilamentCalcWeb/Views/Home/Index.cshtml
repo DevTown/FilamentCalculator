@@ -9,13 +9,7 @@
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
         <div class="form-horizontal">
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Filamenttypes)
-                @Html.DropDownListFor(o => o.Filamenttypes,
-                    new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name)),new { @class = "form-control" })
-            </div>*@
-
-            <div class="form-group">
+           <div class="form-group">
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.Filaments)
@@ -39,13 +33,18 @@
             </div>
 
 
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Berechnen</button>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Calculate</button>
         </div>
-            }
-    <div>
-            @Html.LabelFor(model=>model.costs)
-            @Html.TextBoxFor(model => model.costs,new { @class = "form-control" })
-
-            @Html.DisplayFor(model=>model.filamentCosts)
-    </div>
+    }
+    
+    @if(Model.costs > 0)
+    {
+        <div>
+             @Html.LabelFor(model=>model.costs): 
+             @Html.DisplayFor(model=>model.costs)
+             <br/>
+             @Html.LabelFor(model=>model.filamentCosts): 
+             @Html.DisplayFor(model=>model.filamentCosts)
+        </div>
+    }
         </div>
