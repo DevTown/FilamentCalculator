@@ -18,8 +18,8 @@ namespace FilamentCalculator.Models
         //public IEnumerable<Manufacturer> Manufacturers { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
         
-        [Required]
-        public int SelectedFilament { get; set; }
+        [Required(ErrorMessage = "You have to select a Filament from the list.")]
+        public int? SelectedFilament { get; set; }
         public Manufacturer Manufacturer { get; set; }
         
         public Settings Settings { get; set; }
