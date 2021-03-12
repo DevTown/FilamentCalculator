@@ -13,7 +13,7 @@ namespace FilamentCalculator.Models
 
         private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
         
-        public FilamentViewModel(int id)
+        public FilamentViewModel(int? id)
         {
             this.Filament =  context.Filaments.FirstOrDefault(c => c.FilamentId == id);
             this.Filamenttypes = context.FilamentTypes.ToList();
