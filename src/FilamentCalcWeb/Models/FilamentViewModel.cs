@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FilamentCalculator.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilamentCalculator.Models
@@ -12,6 +13,12 @@ namespace FilamentCalculator.Models
         public Filament Filament { get; set; }
 
         private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
+
+        public List<SelectListItem> DiameterList = new List<SelectListItem>
+        {
+            new SelectListItem{Value = "1,75", Text= "1.75"},
+            new SelectListItem{Value = "2,85", Text= "2.85"},
+        };
         
         public FilamentViewModel(int? id)
         {

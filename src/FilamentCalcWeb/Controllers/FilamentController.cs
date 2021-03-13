@@ -44,8 +44,6 @@ namespace FilamentCalculator.Controllers
             
             return View(item);
         }
-
-       
         
         [HttpPost]
         public IActionResult Edit(FilamentViewModel model)
@@ -63,7 +61,5 @@ namespace FilamentCalculator.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-
-     
     }
 }
