@@ -1,4 +1,4 @@
-using FilamentCalculator.Controllers;
+using FilamentCalculator.Models;
 
 namespace FilamentCalcTest.Views
 {
@@ -8,12 +8,20 @@ namespace FilamentCalcTest.Views
     public class FilamentTest
     {
         [Test]
-        public void TestIndex()
+        public void TestDisplayname()
         {
-            var testItem = new FilamentController();
-            var item = testItem.Index();
-            
-            
+            var testItem = new Filament();
+            var manufactu = new Manufacturer
+            {
+                Name = "Testmanu",
+                ManufacturerId = -1,
+            };
+
+            testItem.Manufacturer = manufactu;
+            testItem.Color = "MyColor";
+
+            Assert.That(testItem.Displayname, Is.EqualTo("Testmanu - MyColor - "));
+
         }
     }
 }
