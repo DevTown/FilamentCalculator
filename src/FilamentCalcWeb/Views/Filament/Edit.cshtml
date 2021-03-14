@@ -12,9 +12,7 @@
 
     <div class="form-group">
         @Html.LabelFor( o => o.Filament.Diameter)
-        @Html.TextBoxFor( o => o.Filament.Diameter,new { @class = "form-control" })
-        
-        @Html.DropDownListFor(model => model.Filament.Diameter, Model.DiameterList, "-- Select Status --")
+        @Html.DropDownListFor(model => model.Filament.Diameter, Model.DiameterList, "-- Select Diameter --")
     </div>
     <div class="form-group">
         @Html.LabelFor( o => o.Filament.Color)
