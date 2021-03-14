@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FilamentCalculator.Models
 {
     public class Filament
@@ -21,9 +23,14 @@ namespace FilamentCalculator.Models
         public float Diameter { get; set; }
 
         public float Price { get; set; }
+        
+        [Display( Name="Spool weight in g")]
         public float SpoolWeight { get; set; }
 
+        [Display( Name="Nozzle printingtemp")]
         public string PrintTempNozzle { get; set; }
+        
+        [Display( Name="Heatbed printingtemp")]
         public string PrintTempBed { get; set; }
     }
 }
