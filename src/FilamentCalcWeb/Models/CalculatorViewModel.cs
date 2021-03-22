@@ -15,7 +15,6 @@ namespace FilamentCalculator.Models
     public class CalculatorViewModel
     {
         public IEnumerable<FilamentType> Filamenttypes { get; set; }
-        //public IEnumerable<Manufacturer> Manufacturers { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
         
         [Required(ErrorMessage = "You have to select a Filament from the list.")]
@@ -44,7 +43,6 @@ namespace FilamentCalculator.Models
         {
             this.Filaments =  context.Filaments.Include(nameof(Manufacturer)).ToList();
             this.Filamenttypes = context.FilamentTypes.ToList();
-            //this.Manufacturers = context.Manufacturers.ToList();
             this.Settings = context.Settingses.FirstOrDefault();
         }
 
