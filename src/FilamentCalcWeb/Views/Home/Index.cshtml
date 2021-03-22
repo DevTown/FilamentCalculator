@@ -14,7 +14,7 @@
 
                 @Html.LabelFor(model => model.Filaments)
                 @Html.DropDownListFor(o => o.SelectedFilament,
-                    new SelectList(Model.Filaments, nameof(Filament.FilamentTypeId), nameof(Filament.Displayname)), "Select Filament", new {@class = "form-control"})
+                    new SelectList(Model.Filaments, nameof(Filament.FilamentId), nameof(Filament.Displayname)), "Select Filament", new {@class = "form-control"})
             </div>
 
             <div class="form-group">
@@ -22,11 +22,12 @@
                 @Html.TextBoxFor(model => model.weight,new { @class = "form-control" })
             </div>
 
+            <!-- 
             <div class="form-group">
                 @Html.LabelFor(model => model.lengthmm)
                 @Html.TextBoxFor(model => model.lengthmm,new { @class = "form-control" })
             </div>
-
+            -->
             <div class="form-group">
                 @Html.LabelFor(model => model.printtimeh)
                 @Html.TextBoxFor(model => model.printtimeh,new { @class = "form-control" })

@@ -2,13 +2,6 @@ using System;
 using FilamentCalculator.Models;
 using Microsoft.EntityFrameworkCore;
 
-
-//dotnet ef migrations add InitialCreate
-//dotnet ef migrations add InitialCreate --namespace Your.Namespace
-//dotnet ef database update
-//dotnet ef migrations add AddProductReviews
-
-
 namespace FilamentCalculator.Data
 {
     public class FilamentCalcContext : DbContext
@@ -37,7 +30,7 @@ namespace FilamentCalculator.Data
         
         public DbSet<Settings> Settingses { get; set; }
         
-        
+        //Todo: Wieder auf Vars umstellen  !!
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             =>optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
         //optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
