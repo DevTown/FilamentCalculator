@@ -1,5 +1,4 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
-@using System.Runtime.InteropServices
 @model FilamentViewModel
 
 @using (Html.BeginForm("Edit", "Filament", FormMethod.Post))
@@ -7,8 +6,9 @@
     <input type="hidden" asp-for="Filament.FilamentId"/>
     <div class="form-group">
         @Html.LabelFor(o => o.Filament.FilamentType)
-        <select asp-for="Filament.FilamentTypeId"
-                asp-items="@new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name))" class="form-control"></select>
+        @Html.DropDownListFor(model => model.Filament.FilamentTypeId,
+                        new SelectList(Model.Filamenttypes, nameof(FilamentType.FilamentTypeId), nameof(FilamentType.Name)),
+                    new {@class = "form-control"})
     </div>
 
     <div class="form-group">
@@ -25,8 +25,9 @@
     
     <div class="form-group">
         @Html.LabelFor( o => o.Filament.Manufacturer)
-        <select asp-for="Filament.ManufacturerId"
-                asp-items="@new SelectList(Model.Manufacturers, nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name))" class="form-control"></select>
+        @Html.DropDownListFor(model => model.Filament.ManufacturerId,
+                        new SelectList(Model.Manufacturers, nameof(Manufacturer.ManufacturerId), nameof(Manufacturer.Name)),
+                    new {@class = "form-control"})
     </div>
     
     <div class="form-group">
