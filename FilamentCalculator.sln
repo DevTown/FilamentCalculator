@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilamentCalcTest", "test\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilamentCalculator", "src\FilamentCalcWeb\FilamentCalculator.csproj", "{EC98FE6E-69B2-494B-A61E-61A735950B42}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{8FC03A68-B6DE-4058-BEB6-17D24BE88D6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FC03A68-B6DE-4058-BEB6-17D24BE88D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC03A68-B6DE-4058-BEB6-17D24BE88D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9BDFC20-78DC-452A-AB98-8A66DAE3B927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9BDFC20-78DC-452A-AB98-8A66DAE3B927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9BDFC20-78DC-452A-AB98-8A66DAE3B927}.Debug|x64.ActiveCfg = Debug|Any CPU
