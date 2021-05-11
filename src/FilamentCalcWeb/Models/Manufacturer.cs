@@ -9,5 +9,13 @@ namespace FilamentCalculator.Models
         public string Url { get; set; }
         
         public List<Filament> Filaments { get; set; }
+
+        public string UrlClick
+        {
+            get
+            {
+                return "";
+            }
+        }
     }
 }

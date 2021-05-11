@@ -1,0 +1,18 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model ManufacturerViewModel
+
+@using (Html.BeginForm("Edit", "Manufacturer", FormMethod.Post))
+{
+    <input type="hidden" asp-for="Manufacturer.ManufacturerId"/>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Manufacturer.Name)
+        @Html.TextBoxFor( o => o.Manufacturer.Name,new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Manufacturer.Url)
+        @Html.TextBoxFor( o => o.Manufacturer.Url,new { @class = "form-control" })
+    </div>
+
+    
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Speichern</button>
+}
