@@ -12,7 +12,7 @@ namespace FilamentCalculator.Models
         public IEnumerable<Manufacturer> Manufacturers { get; set; }
         public Filament Filament { get; set; }
 
-        private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
+        private FilamentCalcContext _context ;
 
         public List<SelectListItem> DiameterList = new List<SelectListItem>
         {
@@ -20,15 +20,17 @@ namespace FilamentCalculator.Models
             new SelectListItem{Value = "2,85", Text= "2.85"},
         };
         
-        public FilamentViewModel(int? id)
+        public FilamentViewModel(int? id, FilamentCalcContext context)
         {
+            this._context = context;
             this.Filament =  context.Filaments.FirstOrDefault(c => c.FilamentId == id);
             this.Filamenttypes = context.FilamentTypes.ToList();
             this.Manufacturers = context.Manufacturers.ToList();
         }
 
-        public FilamentViewModel()
+        public FilamentViewModel(FilamentCalcContext context)
         {
+            this._context = context;
             this.Filament = new Filament();
             this.Filamenttypes = context.FilamentTypes.ToList();
             this.Manufacturers = context.Manufacturers.ToList();

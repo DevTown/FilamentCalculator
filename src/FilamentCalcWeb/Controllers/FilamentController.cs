@@ -40,7 +40,7 @@ namespace FilamentCalculator.Controllers
         public IActionResult Edit(int? id)
         {
             FilamentViewModel item;
-            item = id == null ? new FilamentViewModel() : new FilamentViewModel(id.Value);
+            item = id == null ? new FilamentViewModel(_db) : new FilamentViewModel(id.Value, _db);
             
             return View(item);
         }

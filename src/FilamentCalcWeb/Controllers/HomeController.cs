@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics;
+using FilamentCalculator.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FilamentCalculator.Models;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace FilamentCalculator.Controllers
@@ -29,7 +31,7 @@ namespace FilamentCalculator.Controllers
 
         public IActionResult Index()
         {
-            var calculatorViewModel = new CalculatorViewModel();
+            var calculatorViewModel = new CalculatorViewModel(new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>()));
             
             return View(calculatorViewModel);
         }

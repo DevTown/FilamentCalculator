@@ -35,12 +35,17 @@ namespace FilamentCalculator.Models
         [Display( Name="printing costs")]
         public decimal costs { get; private set; }
 
-        private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
+        private FilamentCalcContext _context;
         public decimal energyCosts { get; private set; }
         public decimal filamentCosts { get; private set; }
 
         public CalculatorViewModel()
         {
+        }
+
+        public CalculatorViewModel(FilamentCalcContext context)
+        {
+            this._context = context;
             this.Filaments =  context.Filaments.Include(nameof(Manufacturer)).ToList();
             this.Filamenttypes = context.FilamentTypes.ToList();
             this.Settings = context.Settingses.FirstOrDefault();
