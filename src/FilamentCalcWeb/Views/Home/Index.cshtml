@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+<div xmlns="http://www.w3.org/1999/html">
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
         <div class="form-horizontal">
@@ -38,14 +38,24 @@
         </div>
     }
     
+    <br><br>
+    
     @if(Model.costs > 0)
     {
-        <div>
-             @Html.LabelFor(model=>model.costs): 
-             @Html.DisplayFor(model=>model.costs)
-             <br/>
-             @Html.LabelFor(model=>model.filamentCosts): 
-             @Html.DisplayFor(model=>model.filamentCosts)
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Print Costs</h4>
+                </div>
+            <ul class="list-unstyled mt-3 mb-4" style="margin: 5px">
+                <li>
+                    @Html.LabelFor(model => model.costs):
+                    @Html.DisplayFor(model => model.costs) €
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.filamentCosts):
+                    @Html.DisplayFor(model => model.filamentCosts) €
+                </li>
+            </ul>
         </div>
     }
         </div>
