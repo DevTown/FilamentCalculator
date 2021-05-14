@@ -26,7 +26,7 @@ namespace FilamentCalculator.Models
         [Display( Name="weight of printing object in g")]
         public decimal weight { get; set; }
         
-        [Display( Name="lengthmm of used filament for printing object in mm")]
+        [Display( Name="length of used filament for printing object in mm")]
         public decimal lengthmm { get; set; }
         
         [Display( Name="printtime of printing object in min")]
@@ -64,5 +64,36 @@ namespace FilamentCalculator.Models
             var CalcErgText = $"FILAMENTKOSTEN: {filcost.ToString(CultureInfo.GetCultureInfo("DE"))}" +
                            $"ENERGIEKOSTEN: {energycosts.ToString()}";
         }
+
+        public void GetWeight()
+        {
+            if (this.weight == 0 && this.lengthmm > 0)
+            {
+                var filamentdiameter = this.Filaments.First(c => c.FilamentId == this.SelectedFilament).Diameter / 10;
+                var i = ( filamentdiameter / 2 ) * ( filamentdiameter / 2 )  * 3.14 * (double) (this.lengthmm / 10) * 1.25;
+                this.weight = Decimal.Round((decimal)i,3);
+            }
+        }
+        /*
+            d = 15 cm
+            l = 425 cm
+           Standard PLA* = 1,25 g/cm³
+
+            G = ( d / 2 )2 * π * l * σ
+            G = ( 15 cm / 2 )2 * 3.14 * 425 cm * 7.85 g / cm3
+            G = 589564 g
+            G = 589,564 kg 
+            
+            
+    Standard PLA* = 1,25 g/cm³
+    Metall PLA* = 2-4 g/cm³
+    Holz PLA* = 1,15-1,25 g/cm³
+    Kohlenstoff PLA* = 1,3 g/cm³
+    Elektrisch leitfähiges PLA* = 1,15 bis 1,25 g/cm³
+    Fluoreszierendes PLA* = 1,21 bis 1,43 g/cm³
+    
+    ABS -> Gering ( ~ 1,04 g/cm³)
+    PETG -> Dichte (g/cm³) 	1,27
+        */
     }
 }
