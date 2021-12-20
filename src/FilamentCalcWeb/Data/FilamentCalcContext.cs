@@ -30,9 +30,9 @@ namespace FilamentCalculator.Data
         
         public DbSet<Settings> Settingses { get; set; }
         
-        //Todo: Wieder auf Vars umstellen  !!
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            =>optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
-        //optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
+            =>
+                //optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
+        optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
     }
 }

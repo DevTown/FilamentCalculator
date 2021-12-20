@@ -44,7 +44,7 @@ namespace FilamentCalcTest.Views
 
             var filaments = new List<Filament>
             {
-                new Filament() {FilamentId = 1, Diameter = 1.75f, Price = 20, SpoolWeight = 800}
+                new() {FilamentId = 1, Diameter = 1.75f, Price = 20, SpoolWeight = 800}
             };
             testitem.Filaments = filaments;
 

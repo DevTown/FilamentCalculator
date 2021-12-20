@@ -2,13 +2,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using FilamentCalculator.Data;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.ComponentModel;
-using System.Globalization;
+
 
 namespace FilamentCalculator.Models
 {
@@ -46,13 +43,20 @@ namespace FilamentCalculator.Models
         public CalculatorViewModel(FilamentCalcContext context)
         {
             this._context = context;
-            this.Filaments =  context.Filaments.Include(nameof(Manufacturer)).ToList();
-            this.Filamenttypes = context.FilamentTypes.ToList();
-            this.Settings = context.Settingses.FirstOrDefault();
+            this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+            this.Filamenttypes = _context.FilamentTypes.ToList();
+            this.Settings = _context.Settingses.FirstOrDefault();
         }
 
         public void Calculate()
         {
+            if (Filaments is null || Filaments.Any() == false)
+            {
+                this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+                this.Filamenttypes = _context.FilamentTypes.ToList();
+                this.Settings = _context.Settingses.FirstOrDefault();
+            }
+            
             var filcost = (this.weight  * 
                               (decimal) (this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).Price 
                                          / this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).SpoolWeight)

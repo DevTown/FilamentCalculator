@@ -21,12 +21,17 @@ namespace FilamentCalculator.Controllers
         [HttpPost]
         public IActionResult Index(CalculatorViewModel viewmodel)
         {
+            var calculatorViewModel = new CalculatorViewModel(new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>()));
+
             if (viewmodel.SelectedFilament>0)
             {
-                viewmodel.Calculate();
+                calculatorViewModel.SelectedFilament = viewmodel.SelectedFilament;
+                calculatorViewModel.weight = viewmodel.weight;
+                calculatorViewModel.lengthmm = viewmodel.lengthmm;
+                calculatorViewModel.Calculate();
             }
             
-            return View(viewmodel);
+            return View(calculatorViewModel); 
         }
 
         public IActionResult Index()
