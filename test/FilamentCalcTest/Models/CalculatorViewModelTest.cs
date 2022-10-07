@@ -18,7 +18,20 @@ namespace FilamentCalcTest.Views
             
             testitem.Calculate();
             
-            Assert.That(testitem.costs, Is.EqualTo(2.5));
+            Assert.That(testitem.costs, Is.EqualTo(2.626M));
+        }
+
+        [Test]
+        public void TestCalcEnergy()
+        {
+             var testitem = GenerateTestViewModel();
+            testitem.weight = 100;
+            
+            Assert.That(testitem.energyCosts, Is.EqualTo(0));
+            
+            testitem.Calculate();
+            
+            Assert.That(testitem.energyCosts, Is.EqualTo(0.126M));
         }
 
         [Test]
@@ -40,7 +53,7 @@ namespace FilamentCalcTest.Views
 
         private CalculatorViewModel GenerateTestViewModel()
         {
-            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1};
+            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1, printtimeh=120 };
 
             var filaments = new List<Filament>
             {

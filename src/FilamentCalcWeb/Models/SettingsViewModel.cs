@@ -17,7 +17,7 @@ namespace FilamentCalculator.Models
         public decimal PrinterDepricationKostsPerHour { get; set; }
         
         [Display( Name="Energyusage in W")]
-        public int PrinterEnergyUsageW { get; set; }
+        public decimal PrinterEnergyUsageW { get; set; }
         
         private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
 

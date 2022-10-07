@@ -62,8 +62,8 @@ namespace FilamentCalculator.Models
                                          / this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).SpoolWeight)
                 );
             
-            var energycosts = (printtimeh / 60) * 
-                              this.Settings.PrinterEnergyUsageW * this.Settings.Energiekosts;
+            var energycosts = (((printtimeh / 60) * 
+                              this.Settings.PrinterEnergyUsageW )/1000) * this.Settings.Energiekosts;
 
             this.filamentCosts = filcost;
             this.energyCosts = energycosts;
