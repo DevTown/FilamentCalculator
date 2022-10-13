@@ -7,11 +7,11 @@
     <UserSecretsId>58a6c0b8-af32-49ec-9f13-6df5296824fd</UserSecretsId>
   </PropertyGroup>
  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
   </ItemGroup>
  <ItemGroup>
    <Content Update="Views\Shared\_Layout.cshtml">
