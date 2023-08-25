@@ -18,10 +18,10 @@
             </div>
             
             <div class="form-group">
-                @Html.LabelFor(model => model.Printers)
-                 @Html.DropDownListFor(o => o.SelectedPrinter,
-                    new SelectList(Model.Printers, nameof(Printer.PrinterId), nameof(Printer.Name)), "Select Printer", new {@class = "form-control"})
-            </div>
+              @Html.LabelFor(model => model.Printers)
+               @Html.DropDownListFor(a => a.SelectedPrinter,
+                                new SelectList(Model.Printers, nameof(Printer.PrinterId), nameof(Printer.Name)), "Select Printer", new {@class = "form-control"})
+          </div>
             
             <div class="form-group">
                 @Html.LabelFor(model => model.weight)

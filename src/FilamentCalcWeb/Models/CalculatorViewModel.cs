@@ -48,6 +48,7 @@ namespace FilamentCalculator.Models
         {
             this._context = context;
             this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+            this.Printers = _context.Printers.ToList();
             this.Filamenttypes = _context.FilamentTypes.ToList();
             this.Settings = _context.Settings.FirstOrDefault();
         }
@@ -57,6 +58,7 @@ namespace FilamentCalculator.Models
             if (Filaments is null || Filaments.Any() == false)
             {
                 this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+                this.Filamenttypes = _context.FilamentTypes.ToList();
                 this.Filamenttypes = _context.FilamentTypes.ToList();
                 this.Settings = _context.Settings.FirstOrDefault();
             }

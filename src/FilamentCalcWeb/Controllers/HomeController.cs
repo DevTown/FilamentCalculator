@@ -23,9 +23,10 @@ namespace FilamentCalculator.Controllers
         {
             var calculatorViewModel = new CalculatorViewModel(new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>()));
 
-            if (viewmodel.SelectedFilament>0)
+            if (viewmodel.SelectedFilament>0 && viewmodel.SelectedPrinter >0)
             {
                 calculatorViewModel.SelectedFilament = viewmodel.SelectedFilament;
+                calculatorViewModel.SelectedPrinter = viewmodel.SelectedPrinter;
                 calculatorViewModel.weight = viewmodel.weight;
                 calculatorViewModel.lengthmm = viewmodel.lengthmm;
                 calculatorViewModel.Calculate();

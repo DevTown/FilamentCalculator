@@ -53,6 +53,22 @@ namespace FilamentCalculator.Data
 
                 context.SaveChanges();
             }
+            {
+                if (context.Printers.Any())
+                {
+                    return;
+                }
+
+                var printer = new Printer
+                {
+                    Name = "MK2.5",
+                    ManufacturerName = "Prusa",
+                    Price = 1000,
+                    EnergyConsumptionW = 300
+                };
+                context.Printers.Add(printer);
+                context.SaveChanges();
+            }
 
             {
                 if (context.Settings.Any())
