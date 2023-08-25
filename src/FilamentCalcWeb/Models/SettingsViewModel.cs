@@ -23,29 +23,27 @@ namespace FilamentCalculator.Models
 
         public SettingsViewModel(int id = 1)
         {
-            var item = context.Settingses.Any() 
-                ? context.Settingses.First(c=>c.SettingsId == id) : new Settings();
+            var item = context.Settings.Any() 
+                ? context.Settings.First(c=>c.SettingsId == id) : new Settings();
 
             if (item != null)
             {
                 this.Energiekosts = item.Energiekosts;
                 this.MissprintChance = item.MissprintChance;
                 this.PrinterDepricationKostsPerHour = item.PrinterDepricationKostsPerHour;
-                this.PrinterEnergyUsageW = item.PrinterEnergyUsageW;
             }
         }
         
         public SettingsViewModel()
         {
-            var item = context.Settingses.Any() 
-                ? context.Settingses.First() : new Settings();
+            var item = context.Settings.Any() 
+                ? context.Settings.First() : new Settings();
 
             if (item != null)
             {
                 this.Energiekosts = item.Energiekosts;
                 this.MissprintChance = item.MissprintChance;
                 this.PrinterDepricationKostsPerHour = item.PrinterDepricationKostsPerHour;
-                this.PrinterEnergyUsageW = item.PrinterEnergyUsageW;
             }
         }
     }

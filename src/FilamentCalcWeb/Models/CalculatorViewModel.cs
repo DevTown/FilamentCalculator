@@ -16,7 +16,10 @@ namespace FilamentCalculator.Models
         
         [Required(ErrorMessage = "You have to select a Filament from the list.")]
         public int? SelectedFilament { get; set; }
+        public int? SelectedPrinter { get; set; }
         public Manufacturer Manufacturer { get; set; }
+        
+        public IEnumerable<Printer> Printers { get; set; }
         
         public Settings Settings { get; set; }
         
@@ -35,6 +38,7 @@ namespace FilamentCalculator.Models
         private FilamentCalcContext _context;
         public decimal energyCosts { get; private set; }
         public decimal filamentCosts { get; private set; }
+        
 
         public CalculatorViewModel()
         {
@@ -45,7 +49,7 @@ namespace FilamentCalculator.Models
             this._context = context;
             this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
             this.Filamenttypes = _context.FilamentTypes.ToList();
-            this.Settings = _context.Settingses.FirstOrDefault();
+            this.Settings = _context.Settings.FirstOrDefault();
         }
 
         public void Calculate()
@@ -54,7 +58,7 @@ namespace FilamentCalculator.Models
             {
                 this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
                 this.Filamenttypes = _context.FilamentTypes.ToList();
-                this.Settings = _context.Settingses.FirstOrDefault();
+                this.Settings = _context.Settings.FirstOrDefault();
             }
             
             var filcost = (this.weight  * 
@@ -63,7 +67,8 @@ namespace FilamentCalculator.Models
                 );
             
             var energycosts = (((printtimeh / 60) * 
-                              this.Settings.PrinterEnergyUsageW )/1000) * this.Settings.Energiekosts;
+                              this.Printers.First(p=>p.PrinterId == this.SelectedPrinter).EnergyConsumptionW )/1000)
+                              * this.Settings.Energiekosts;
 
             this.filamentCosts = filcost;
             this.energyCosts = energycosts;

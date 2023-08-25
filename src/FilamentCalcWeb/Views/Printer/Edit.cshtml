@@ -1,0 +1,36 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model PrinterViewModel
+
+@using (Html.BeginForm("Edit", "Printer", FormMethod.Post))
+{
+    <input type="hidden" asp-for="Printer.PrinterId"/>
+  
+    <div class="form-group">
+        @Html.LabelFor( o => o.Printer.Name)
+        @Html.TextBoxFor( o => o.Printer.Name,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Printer.ManufacturerName)
+        @Html.TextBoxFor( o => o.Printer.ManufacturerName,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Printer.FilamentDiameter)
+        @Html.DropDownListFor(model => model.Printer.FilamentDiameter,
+                new SelectList(Model.DiameterList, nameof(SelectListItem.Value), nameof(SelectListItem.Text)),
+            "-- Select Diameter --",new {@class = "form-control"})
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor( o => o.Printer.Price)
+        @Html.TextBoxFor( o => o.Printer.Price,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Printer.EnergyConsumptionW)
+        @Html.TextBoxFor( o => o.Printer.EnergyConsumptionW,new { @class = "form-control" })
+    </div>
+    
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Speichern</button>
+}

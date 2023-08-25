@@ -28,11 +28,13 @@ namespace FilamentCalculator.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<FilamentType> FilamentTypes { get; set; }
         
-        public DbSet<Settings> Settingses { get; set; }
+        public DbSet<Settings> Settings { get; set; }
+        
+        public DbSet<Printer> Printers { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             =>
-                //optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
-        optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
+                optionsBuilder.UseNpgsql($"Host=localhost;Database=filamentcalc;Username=postgres;Password=example"); 
+        //optionsBuilder.UseNpgsql($"Host={MyHost};Database={MyDb};Username={MyUser};Password={MyPw}");
     }
 }

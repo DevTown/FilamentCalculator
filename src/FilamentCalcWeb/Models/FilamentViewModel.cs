@@ -14,7 +14,7 @@ namespace FilamentCalculator.Models
 
         private FilamentCalcContext _context ;
 
-        public List<SelectListItem> DiameterList = new List<SelectListItem>
+        public List<SelectListItem> DiameterList = new()
         {
             new SelectListItem{Value = "1,75", Text= "1.75"},
             new SelectListItem{Value = "2,85", Text= "2.85"},
@@ -34,6 +34,14 @@ namespace FilamentCalculator.Models
             this.Filament = new Filament();
             this.Filamenttypes = context.FilamentTypes.ToList();
             this.Manufacturers = context.Manufacturers.ToList();
+        }
+        
+        public FilamentViewModel()
+        {
+            //this._context = context;
+            this.Filament = new Filament();
+           // this.Filamenttypes = context.FilamentTypes.ToList();
+            //this.Manufacturers = context.Manufacturers.ToList();
         }
     }
 }

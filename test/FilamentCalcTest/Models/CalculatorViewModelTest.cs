@@ -61,7 +61,7 @@ namespace FilamentCalcTest.Views
             };
             testitem.Filaments = filaments;
 
-            var settings = new Settings {PrinterEnergyUsageW = 300, Energiekosts = (decimal)0.21};
+            var settings = new Settings {Energiekosts = (decimal)0.21};
 
             testitem.Settings = settings;
             

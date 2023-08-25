@@ -1,0 +1,42 @@
+@model IEnumerable<Printer>
+
+    @{
+    ViewData["Title"] = "Printers";
+    }
+
+    <a asp-area="" asp-controller=@nameof(Printer) asp-action="Edit" class="btn btn-outline-success my-2 my-sm-0">Add Printer</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufacturerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilamentDiameter)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufacturerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilamentDiameter)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.PrinterId}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.PrinterId})
+            </td>
+        </tr>
+        }
+    </table>
