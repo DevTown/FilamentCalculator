@@ -1,6 +1,7 @@
 using System;
 using FilamentCalculator.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,9 @@ namespace FilamentCalculator
                 try
                 {
                     var context = services.GetRequiredService<FilamentCalcContext>();
+                    context.Database.Migrate();
                     DbInitializer.Initialize(context);
+                    
                 }
                 catch (Exception ex)
                 {

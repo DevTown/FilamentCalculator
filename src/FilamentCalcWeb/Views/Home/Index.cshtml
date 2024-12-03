@@ -23,7 +23,7 @@
                                 new SelectList(Model.Printers, nameof(Printer.PrinterId), nameof(Printer.Name)), "Select Printer", new {@class = "form-control"})
           </div>
             
-            <div class="form-group">
+                <div class="form-group">
                 @Html.LabelFor(model => model.weight)
                 @Html.TextBoxFor(model => model.weight,new { @class = "form-control" })
             </div>
@@ -35,10 +35,14 @@
             </div>
             -->
             <div class="form-group">
-                @Html.LabelFor(model => model.printtimeh)
-                @Html.TextBoxFor(model => model.printtimeh,new { @class = "form-control" })
+                @Html.LabelFor(model => model.printtimemin)
+                @Html.TextBoxFor(model => model.printtimemin,new { @class = "form-control" }) 
+                @Html.CheckBoxFor(model => model.isMinuit) @Html.LabelFor(model => model.isMinuit) 
             </div>
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.manufacurworktime)
+                @Html.TextBoxFor(model => model.manufacurworktime,new { @class = "form-control" })
+            </div>
 
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Calculate</button>
         </div>
@@ -51,21 +55,40 @@
         <div class="card mb-4 rounded-3 shadow-sm">
             <div class="card-header py-3">
                 <h4 class="my-0 fw-normal">Print Costs</h4>
-                </div>
-            <ul class="list-unstyled mt-3 mb-4" style="margin: 5px">
-                <li>
-                    @Html.LabelFor(model => model.costs):
-                    @Html.DisplayFor(model => model.costs) €
-                </li>
-                <li>
-                    @Html.LabelFor(model => model.energyCosts):
-                    @Html.DisplayFor(model => model.energyCosts) €
-                </li>
-                <li>
-                    @Html.LabelFor(model => model.filamentCosts):
-                    @Html.DisplayFor(model => model.filamentCosts) €
-                </li>
-            </ul>
+            </div>
+            <table class="table table-sm table-striped">
+                <thead class="">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Cost</th>
+                </tr>
+                </thead>
+                <tbody  class="table-group-divider">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@Html.LabelFor(model => model.filamentCosts)</td>
+                    <td> @Html.DisplayFor(model => model.filamentCosts) €</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>@Html.LabelFor(model => model.energyCosts)</td>
+                    <td> @Html.DisplayFor(model => model.energyCosts) €</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>@Html.LabelFor(model => model.manufacturingCosts)</td>
+                    <td> @Html.DisplayFor(model => model.manufacturingCosts) €</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="font-weight-bold table-info">
+                    <th scope="row">4</th>
+                    <td>@Html.LabelFor(model => model.costs)</td>
+                    <td>@Html.DisplayFor(model => model.costs) €</td>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     }
-        </div>
+</div>

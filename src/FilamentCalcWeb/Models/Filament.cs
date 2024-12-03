@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace FilamentCalculator.Models
 {
@@ -8,7 +10,7 @@ namespace FilamentCalculator.Models
         {
             get
             {
-                return this.Manufacturer.Name + " - " + this.Color + " - ";
+                return this.Manufacturer.Name +" - " + this.FilamentType.Name + " - " + this.Color ;
             }
         }
 
@@ -22,6 +24,7 @@ namespace FilamentCalculator.Models
         public string Color { get; set; }
         public float Diameter { get; set; }
 
+        [Display(Name="Price in EUR")]
         public float Price { get; set; }
         
         [Display( Name="Spool weight in g")]
@@ -31,6 +34,7 @@ namespace FilamentCalculator.Models
         public string PrintTempNozzle { get; set; }
         
         [Display( Name="Heatbed printingtemp")]
+        [DefaultValue("")]
         public string PrintTempBed { get; set; }
     }
 }

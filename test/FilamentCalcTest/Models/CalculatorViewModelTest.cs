@@ -53,7 +53,7 @@ namespace FilamentCalcTest.Views
 
         private CalculatorViewModel GenerateTestViewModel()
         {
-            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1, printtimeh=120 };
+            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1, printtimemin=120 };
 
             var filaments = new List<Filament>
             {

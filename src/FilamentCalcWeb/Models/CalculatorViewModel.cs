@@ -13,32 +13,53 @@ namespace FilamentCalculator.Models
     {
         public IEnumerable<FilamentType> Filamenttypes { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
-        
+
         [Required(ErrorMessage = "You have to select a Filament from the list.")]
         public int? SelectedFilament { get; set; }
+
         public int? SelectedPrinter { get; set; }
         public Manufacturer Manufacturer { get; set; }
-        
-        public IEnumerable<Printer> Printers { get; set; }
-        
-        public Settings Settings { get; set; }
-        
-        [Display( Name="weight of printing object in g")]
-        public decimal weight { get; set; }
-        
-        [Display( Name="length of used filament for printing object in mm")]
-        public decimal lengthmm { get; set; }
-        
-        [Display( Name="printtime of printing object in min")]
-        public decimal printtimeh { get; set; }
-        
-        [Display( Name="printing costs")]
-        public decimal costs { get; private set; }
 
+        public IEnumerable<Printer> Printers { get; set; }
+
+        public Settings Settings { get; set; }
+
+        [Display(Name = "Object-weight in g")]
+        public decimal weight { get; set; }
+
+        [Display(Name = "Length of used filament for printing object in mm")]
+        public decimal lengthmm { get; set; }
+
+        [Display(Name = "Print-time")]
+        public decimal printtimemin { get; set; }
+
+        [Display(Name = "in Minutes")]
+        public bool isMinuit { get; set; } 
+        
+        [Display(Name = "Time for Manufactoringwork")]
+        public decimal manufacurworktime { get; set; }
+        
+        
         private FilamentCalcContext _context;
+
+        [Display(Name = "Printing-costs")] 
+        public decimal costs
+        {
+            get
+            {
+                return this.energyCosts + this.filamentCosts + this.manufacturingCosts;
+            }
+        }
+
+        [Display(Name = "Energy-costs min 0,5 EUR")]
         public decimal energyCosts { get; private set; }
+        
+        [Display(Name = "Filament-costs")]
         public decimal filamentCosts { get; private set; }
         
+        [Display(Name = "Manufacturing-costs")]
+        public decimal manufacturingCosts { get; private set; }
+
 
         public CalculatorViewModel()
         {
@@ -47,7 +68,7 @@ namespace FilamentCalculator.Models
         public CalculatorViewModel(FilamentCalcContext context)
         {
             this._context = context;
-            this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+            this.Filaments = _context.Filaments.Include(nameof(Manufacturer)).ToList();
             this.Printers = _context.Printers.ToList();
             this.Filamenttypes = _context.FilamentTypes.ToList();
             this.Settings = _context.Settings.FirstOrDefault();
@@ -57,39 +78,44 @@ namespace FilamentCalculator.Models
         {
             if (Filaments is null || Filaments.Any() == false)
             {
-                this.Filaments =  _context.Filaments.Include(nameof(Manufacturer)).ToList();
+                this.Filaments = _context.Filaments.Include(nameof(Manufacturer)).ToList();
                 this.Filamenttypes = _context.FilamentTypes.ToList();
                 this.Filamenttypes = _context.FilamentTypes.ToList();
                 this.Settings = _context.Settings.FirstOrDefault();
             }
+
+            decimal missprintfactor = (((decimal)this.Settings.MissprintChance / 100) + 1);
+            var filcost = (this.weight *
+                           (decimal)(this.Filaments.First(c => c.FilamentId == this.SelectedFilament).Price
+                                     / this.Filaments.First(c => c.FilamentId == this.SelectedFilament).SpoolWeight)
+                ) * missprintfactor;
             
-            var filcost = (this.weight  * 
-                              (decimal) (this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).Price 
-                                         / this.Filaments.First(c=>c.FilamentId == this.SelectedFilament).SpoolWeight)
-                );
+            var printtime = isMinuit?  printtimemin / 60 : printtimemin;
             
-            var energycosts = (((printtimeh / 60) * 
-                              this.Printers.First(p=>p.PrinterId == this.SelectedPrinter).EnergyConsumptionW )/1000)
+            var energycosts = ((printtime *
+                                this.Printers.First(p => p.PrinterId == this.SelectedPrinter).EnergyConsumptionW) /
+                               1000)
                               * this.Settings.Energiekosts;
 
             this.filamentCosts = filcost;
-            this.energyCosts = energycosts;
             
-            this.costs = filcost + energycosts;
-            
-            var CalcErgText = $"FILAMENTKOSTEN: {filcost.ToString(CultureInfo.GetCultureInfo("DE"))}" +
-                           $"ENERGIEKOSTEN: {energycosts.ToString()}";
-        }
+            // Energiekosts min value 0.5 Eur 
+            this.energyCosts = (energycosts < (decimal) 0.5) ? (decimal) 0.5 : energycosts;
 
-        public void GetWeight()
-        {
-            if (this.weight == 0 && this.lengthmm > 0)
-            {
-                var filamentdiameter = this.Filaments.First(c => c.FilamentId == this.SelectedFilament).Diameter / 10;
-                var i = ( filamentdiameter / 2 ) * ( filamentdiameter / 2 )  * 3.14 * (double) (this.lengthmm / 10) * 1.25;
-                this.weight = Decimal.Round((decimal)i,3);
-            }
+            this.manufacturingCosts = this.Settings.Hourlywage * (decimal)this.manufacurworktime;
+
         }
+ 
+
+
+public void GetWeight()
+        {
+            if (this.weight != 0 || this.lengthmm <= 0) return;
+            var filamentdiameter = this.Filaments.First(c => c.FilamentId == this.SelectedFilament).Diameter / 10;
+            var i = ( filamentdiameter / 2 ) * ( filamentdiameter / 2 )  * 3.14 * (double) (this.lengthmm / 10) * 1.25;
+            this.weight = Decimal.Round((decimal)i,3);
+        }
+        
         /*
             d = 15 cm
             l = 425 cm

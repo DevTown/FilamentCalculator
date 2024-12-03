@@ -80,8 +80,9 @@ namespace FilamentCalculator.Data
                 {
                     Energiekosts = (decimal) 0.24,
                     MissprintChance = 10,
-                    PrinterDepricationKostsPerHour = 5
-                    
+                    PrinterDepricationKostsPerHour = 5,
+                    Hourlywage = (decimal)20.0,
+                    Revenuepercentage = (decimal) 100.0,
                 };
 
                 context.Settings.Add(setting);

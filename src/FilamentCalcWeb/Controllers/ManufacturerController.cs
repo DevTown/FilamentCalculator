@@ -43,5 +43,22 @@ namespace FilamentCalculator.Controllers
             
             return RedirectToAction(nameof(Index));
         }
+        
+        [HttpPost]
+        public IActionResult Edit(ManufacturerViewModel model)
+        {
+            if (model.Manufacturer.ManufacturerId == 0)
+            {
+                _db.Manufacturers.Add(model.Manufacturer);
+            }
+            else
+            {
+                _db.Manufacturers.Update(model.Manufacturer);    
+            }
+            
+            _db.SaveChanges();
+            
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

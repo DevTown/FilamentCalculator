@@ -18,7 +18,14 @@ namespace FilamentCalculator.Models
         
         [Display( Name="Energyusage in W")]
         public decimal PrinterEnergyUsageW { get; set; }
+
+        [Display( Name="Hourly wage (Kost per hour for person)")]
+        public decimal Hourlywage { get; set; }
         
+        [Display( Name="Revenue in percent (On printitem without wage))")]
+        public decimal Revenuepercentage { get; set; }
+
+
         private FilamentCalcContext context = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
 
         public SettingsViewModel(int id = 1)
@@ -31,6 +38,8 @@ namespace FilamentCalculator.Models
                 this.Energiekosts = item.Energiekosts;
                 this.MissprintChance = item.MissprintChance;
                 this.PrinterDepricationKostsPerHour = item.PrinterDepricationKostsPerHour;
+                this.Hourlywage = item.Hourlywage;
+                this.Revenuepercentage = item.Revenuepercentage;
             }
         }
         
@@ -44,7 +53,11 @@ namespace FilamentCalculator.Models
                 this.Energiekosts = item.Energiekosts;
                 this.MissprintChance = item.MissprintChance;
                 this.PrinterDepricationKostsPerHour = item.PrinterDepricationKostsPerHour;
+                this.Hourlywage = item.Hourlywage;
+                this.Revenuepercentage = item.Revenuepercentage;
             }
         }
+
+       
     }
 }
