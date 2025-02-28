@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FilamentCalculator.Models;
+using FilamentCalculator.ViewModels;
 using NUnit.Framework;
 
 namespace FilamentCalcTest.Views

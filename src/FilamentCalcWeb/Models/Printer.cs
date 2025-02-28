@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FilamentCalculator.Models;
 
 public class Printer
@@ -10,7 +12,12 @@ public class Printer
     
     public float Price { get; set; }
     
+    [Display(Name="Periot Of Amortisation in h")]
+    public decimal PeriotOfAmortisation { get; set; }
+    
     public float FilamentDiameter { get; set; }
     public decimal EnergyConsumptionW { get; set; }
-    
+
+    public decimal AmotationCostPerHour => (decimal)this.Price / this.PeriotOfAmortisation;
+
 }

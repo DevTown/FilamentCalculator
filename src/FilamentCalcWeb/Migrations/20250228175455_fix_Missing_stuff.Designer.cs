@@ -2,6 +2,7 @@
 using FilamentCalculator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FilamentCalculator.Migrations
 {
     [DbContext(typeof(FilamentCalcContext))]
-    partial class FilamentCalcContextModelSnapshot : ModelSnapshot
+    [Migration("20250228175455_fix_Missing_stuff")]
+    partial class fix_Missing_stuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

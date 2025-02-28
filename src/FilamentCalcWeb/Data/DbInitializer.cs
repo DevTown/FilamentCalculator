@@ -69,6 +69,26 @@ namespace FilamentCalculator.Data
                 context.Printers.Add(printer);
                 context.SaveChanges();
             }
+            
+            {
+                if (context.Shipments.Any())
+                {
+                    return;
+                }
+
+                var shipment = new Shipment
+                {
+                    Name = "Nome",
+                    ShipmentOrg = "Selfe",
+                    Packagingprice = (decimal)0.0,
+                    FillerPrice = (decimal)0.0,
+                    LablePrice = (decimal)0.0,
+                    AddonItemPrice = (decimal)0.0
+                };
+                
+                context.Shipments.Add(shipment);
+                context.SaveChanges();
+            }
 
             {
                 if (context.Settings.Any())

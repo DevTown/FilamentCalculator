@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FilamentCalculator.Data;
+using FilamentCalculator.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
-namespace FilamentCalculator.Models
+namespace FilamentCalculator.ViewModels
 {
     public class FilamentViewModel
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mime;
 using FilamentCalculator.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,8 @@ namespace FilamentCalculator.Data
         public DbSet<Settings> Settings { get; set; }
         
         public DbSet<Printer> Printers { get; set; }
+        
+        public DbSet<Shipment> Shipments { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             =>

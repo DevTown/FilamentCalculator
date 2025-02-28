@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model FilamentCalculator.ViewModels.ShipmentViewModel
+
+@using (Html.BeginForm("Edit", "Shipment", FormMethod.Post))
+{
+    <input type="hidden" asp-for="Shipment.ShipmentID"/>
+  
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.Name)
+        @Html.TextBoxFor( o => o.Shipment.Name,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.ShipmentOrg)
+        @Html.TextBoxFor( o => o.Shipment.ShipmentOrg,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.ShippingPrice)
+        @Html.TextBoxFor( o => o.Shipment.ShippingPrice,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.Packagingprice)
+        @Html.TextBoxFor( o => o.Shipment.Packagingprice,new { @class = "form-control" })
+    </div>
+   
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.FillerPrice)
+        @Html.TextBoxFor( o => o.Shipment.FillerPrice,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.LablePrice)
+        @Html.TextBoxFor( o => o.Shipment.LablePrice,new { @class = "form-control" })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor( o => o.Shipment.AddonItemPrice)
+        @Html.TextBoxFor( o => o.Shipment.AddonItemPrice,new { @class = "form-control" })
+    </div>
+    
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Speichern</button>
+}

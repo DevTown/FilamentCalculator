@@ -1,22 +1,19 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FilamentCalculator.Data;
-using FilamentCalculator.Models;
 using FilamentCalculator.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilamentCalculator.Controllers;
 
-public class PrinterController: Controller
+public class ShipmentController:Controller
 {
-    
-    private readonly FilamentCalcContext _db = new FilamentCalcContext();
-    
-    // GET
+    private readonly FilamentCalcContext _db = new();
+        
     public IActionResult Index()
     {
-        return View(_db.Printers.ToList());
+        return View(_db.Shipments.ToList());
     }
     
     public async Task<IActionResult> Delete(int? id)
@@ -26,37 +23,36 @@ public class PrinterController: Controller
             return NotFound();
         }
             
-        var printer =  await _db.Printers
-            .FirstOrDefaultAsync(m => m.PrinterId == id);
-        if (printer == null)
+        var shipment =  await _db.Shipments
+            .FirstOrDefaultAsync(m => m.ShipmentID == id);
+        if (shipment == null)
         {
             return NotFound();
         }
         
-        _db.Printers.Remove(printer);
+        _db.Shipments.Remove(shipment);
         _db.SaveChanges();
-        
         return RedirectToAction(nameof(Index));
     }
     
     public IActionResult Edit(int? id)
     {
-        PrinterViewModel item;
-        item = id == null ? new PrinterViewModel(_db) : new PrinterViewModel(id.Value, _db);
+        ShipmentViewModel item;
+        item = id == null ? new ShipmentViewModel(_db) : new ShipmentViewModel(id.Value, _db);
             
         return View(item);
     }
     
     [HttpPost]
-    public IActionResult Edit(PrinterViewModel model)
+    public IActionResult Edit(ShipmentViewModel model)
     {
-        if (model.Printer.PrinterId == 0)
+        if (model.Shipment.ShipmentID == 0)
         {
-            _db.Printers.Add(model.Printer);
+            _db.Shipments.Add(model.Shipment);
         }
         else
         {
-            _db.Printers.Update(model.Printer);    
+            _db.Shipments.Update(model.Shipment);    
         }
             
         _db.SaveChanges();

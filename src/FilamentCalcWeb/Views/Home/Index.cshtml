@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-@model CalculatorViewModel
+@model FilamentCalculator.ViewModels.CalculatorViewModel
 @{
     ViewData["Title"] = "Calculator";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,88 +7,124 @@
 
 <div xmlns="http://www.w3.org/1999/html">
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-    {
-        <div class="form-horizontal">
-           <div class="form-group">
-                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
+    {  
+        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+        <div class="row">
+            <div class="col">
                 @Html.LabelFor(model => model.Filaments)
                 @Html.DropDownListFor(o => o.SelectedFilament,
                     new SelectList(Model.Filaments, nameof(Filament.FilamentId), nameof(Filament.Displayname)), "Select Filament", new {@class = "form-control"})
             </div>
-            
-            <div class="form-group">
-              @Html.LabelFor(model => model.Printers)
-               @Html.DropDownListFor(a => a.SelectedPrinter,
-                                new SelectList(Model.Printers, nameof(Printer.PrinterId), nameof(Printer.Name)), "Select Printer", new {@class = "form-control"})
-          </div>
-            
-                <div class="form-group">
-                @Html.LabelFor(model => model.weight)
-                @Html.TextBoxFor(model => model.weight,new { @class = "form-control" })
+                <div class="col">
+                @Html.LabelFor(model => model.Printers)
+                @Html.DropDownListFor(a => a.SelectedPrinter,
+                    new SelectList(Model.Printers, nameof(Printer.PrinterId), nameof(Printer.Name)), "Select Printer", new {@class = "form-control"})
             </div>
-
-            <!-- 
-            <div class="form-group">
-                @Html.LabelFor(model => model.lengthmm)
-                @Html.TextBoxFor(model => model.lengthmm,new { @class = "form-control" })
-            </div>
-            -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.printtimemin)
-                @Html.TextBoxFor(model => model.printtimemin,new { @class = "form-control" }) 
-                @Html.CheckBoxFor(model => model.isMinuit) @Html.LabelFor(model => model.isMinuit) 
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.manufacurworktime)
-                @Html.TextBoxFor(model => model.manufacurworktime,new { @class = "form-control" })
-            </div>
-
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Calculate</button>
         </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                @Html.LabelFor(model => model.weight)
+                @Html.TextBoxFor(model => model.weight, new {@class = "form-control"})
+            </div>
+            <div class="col">
+                @Html.LabelFor(model => model.printtimemin)
+                @Html.TextBoxFor(model => model.printtimemin, new {@class = "form-control"})
+                @Html.CheckBoxFor(model => model.isMinuit) @Html.LabelFor(model => model.isMinuit)
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                @Html.LabelFor(model => model.manufacurworktime)
+                @Html.TextBoxFor(model => model.manufacurworktime, new {@class = "form-control"})
+            </div>
+            <div class="col">
+                @Html.LabelFor(model => model.extendedmaterialcosts)
+                @Html.TextBoxFor(model => model.extendedmaterialcosts, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <br/>
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Calculate</button>
+            </div>
+            </div>
     }
     
     <br><br>
     
     @if(Model.costs > 0)
     {
-        <div class="card mb-4 rounded-3 shadow-sm">
-            <div class="card-header py-3">
-                <h4 class="my-0 fw-normal">Print Costs</h4>
+        @using (Html.BeginForm("ExportToExcel", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.energyCosts)
+            @Html.HiddenFor(m => m.filamentCosts)
+            @Html.HiddenFor(m => m.manufacturingCosts)
+            @Html.HiddenFor(m => m.revenu)
+    
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Print Costs</h4>
+                </div>
+                <table class="table table-sm table-striped">
+                    <thead class="">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>@Html.LabelFor(model => model.filamentCosts)</td>
+                        <td> @Html.DisplayFor(model => model.filamentCosts) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>@Html.LabelFor(model => model.energyCosts)</td>
+                        <td> @Html.DisplayFor(model => model.energyCosts) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>@Html.LabelFor(model => model.manufacturingCosts)</td>
+                        <td> @Html.DisplayFor(model => model.manufacturingCosts) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>@Html.LabelFor(model => model.printerCosts)</td>
+                        <td> @Html.DisplayFor(model => model.printerCosts) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>@Html.LabelFor(model => model.extendedmaterialcosts)</td>
+                        <td> @Html.DisplayFor(model => model.extendedmaterialcosts) €</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr class="font-weight-bold table-info">
+                        <th scope="row">6</th>
+                        <td>@Html.LabelFor(model => model.costs)</td>
+                        <td>@Html.DisplayFor(model => model.costs) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>@Html.LabelFor(model => model.revenu)</td>
+                        <td> @Html.DisplayFor(model => model.revenu) €</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>@Html.LabelFor(model => model.totalCosts)</td>
+                        <td> @Html.DisplayFor(model => model.totalCosts) €</td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
-            <table class="table table-sm table-striped">
-                <thead class="">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Cost</th>
-                </tr>
-                </thead>
-                <tbody  class="table-group-divider">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>@Html.LabelFor(model => model.filamentCosts)</td>
-                    <td> @Html.DisplayFor(model => model.filamentCosts) €</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>@Html.LabelFor(model => model.energyCosts)</td>
-                    <td> @Html.DisplayFor(model => model.energyCosts) €</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>@Html.LabelFor(model => model.manufacturingCosts)</td>
-                    <td> @Html.DisplayFor(model => model.manufacturingCosts) €</td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr class="font-weight-bold table-info">
-                    <th scope="row">4</th>
-                    <td>@Html.LabelFor(model => model.costs)</td>
-                    <td>@Html.DisplayFor(model => model.costs) €</td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
+            @Html.LabelFor(model => model.manufacturingTitle)
+            @Html.TextBoxFor(model => model.manufacturingTitle,new { @class = "form-control" })
+            <br/>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Export</button>
+        }
     }
 </div>

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FilamentCalculator.Data;
+using FilamentCalculator.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace FilamentCalculator.Models;
+namespace FilamentCalculator.ViewModels;
 
 public class PrinterViewModel
 {

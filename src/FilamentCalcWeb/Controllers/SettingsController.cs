@@ -3,6 +3,7 @@ using FilamentCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using FilamentCalculator.ViewModels;
 
 namespace FilamentCalculator.Controllers
 {

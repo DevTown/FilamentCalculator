@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FilamentCalculator.Data;
 using FilamentCalculator.Models;
+using FilamentCalculator.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +41,7 @@ namespace FilamentCalculator.Controllers
             }
 
             _db.Manufacturers.Remove(manufacturer);
-            
+            _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
         
