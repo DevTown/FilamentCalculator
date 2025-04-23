@@ -38,6 +38,7 @@ namespace FilamentCalculator.Controllers
                 calculatorViewModel.manufacurworktime = viewmodel.manufacurworktime;
                 calculatorViewModel.manufacturingTitle = viewmodel.manufacturingTitle;
                 calculatorViewModel.extendedmaterialcosts = viewmodel.extendedmaterialcosts;
+                calculatorViewModel.SelectedShipment = viewmodel.SelectedShipment;
                 calculatorViewModel.Calculate();
             }
            
@@ -52,7 +53,7 @@ namespace FilamentCalculator.Controllers
             return View(calculatorViewModel);
         }
         
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult ExportToExcel(CalculatorViewModel viewmodel)
         {
             var title = viewmodel.manufacturingTitle ?? "";
@@ -89,7 +90,7 @@ namespace FilamentCalculator.Controllers
             {
                 return Error();
             }
-        }
+        }*/
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

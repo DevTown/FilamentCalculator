@@ -13,6 +13,8 @@ namespace FilamentCalculator.ViewModels
         public IEnumerable<FilamentType> Filamenttypes { get; set; }
         
         public IEnumerable<Shipment> Shipments { get; set; }
+        
+        public int? SelectedShipment { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
 
         [Required(ErrorMessage = "You have to select a Filament from the list.")]
