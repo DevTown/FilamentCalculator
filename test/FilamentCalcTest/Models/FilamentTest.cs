@@ -1,9 +1,8 @@
 using FilamentCalculator.Models;
+using NUnit.Framework;
 
-namespace FilamentCalcTest.Views
+namespace FilamentCalcTest.Models
 {
-    using NUnit.Framework;
-    
     [TestFixture]
     public class FilamentTest
     {
