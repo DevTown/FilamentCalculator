@@ -16,7 +16,7 @@ namespace FilamentCalculator.Controllers
         // GET
         public IActionResult Index()
         {
-            return View(_db.Filaments.Include(nameof(Manufacturer)).ToList());
+            return View(_db.Filaments.Include(nameof(Manufacturer)).Include(nameof(FilamentType)).ToList());
         }
 
         public async Task<IActionResult> Delete(int? id)

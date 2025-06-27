@@ -40,7 +40,7 @@ namespace FilamentCalculator.ViewModels
         [Display(Name = "in Minutes")]
         public bool isMinuit { get; set; } 
         
-        [Display(Name = "Time for Manufactoringwork")]
+        [Display(Name = "Time for Manufactoringwork (in min)")]
         public decimal manufacurworktime { get; set; }
         
         [Display(Name = "Extended Materialcosts")]
@@ -58,7 +58,7 @@ namespace FilamentCalculator.ViewModels
         [Display(Name = "Revenu ")]
         public decimal revenu { get; set; }
 
-        [Display(Name = "Energy-costs min 0,5 EUR")]
+        [Display(Name = "Energy-costs")]
         public decimal energyCosts { get; set; }
         
         [Display(Name = "Printer costs per h")]
@@ -114,10 +114,9 @@ namespace FilamentCalculator.ViewModels
             
             this.printerCosts =  this.Printers.First(p => p.PrinterId == this.SelectedPrinter).AmotationCostPerHour * printtime;
             
-            // Energiekosts min value 0.5 Eur 
-            this.energyCosts = (energycosts < (decimal) 0.5) ? (decimal) 0.5 : energycosts;
+            this.energyCosts =  energycosts;
 
-            this.manufacturingCosts = this.Settings.Hourlywage * this.manufacurworktime;
+            this.manufacturingCosts = (this.Settings.Hourlywage / 60) * this.manufacurworktime;
             
             this.revenu = this.costs * Settings.Revenuepercentage;
 
