@@ -12,7 +12,7 @@ namespace FilamentCalcTest.Models
             // Arrange
             var printer = new Printer
             {
-                Price = 1000m,
+                Price = 1000,
                 PeriotOfAmortisation = 500m
             };
 
@@ -54,7 +54,7 @@ namespace FilamentCalcTest.Models
             // Arrange
             var printer = new Printer
             {
-                Price = 1000m,
+                Price = 1000,
                 PeriotOfAmortisation = 0m
             };
 
