@@ -35,7 +35,7 @@ namespace FilamentCalculator.ViewModels
         public decimal lengthmm { get; set; }
 
         [Display(Name = "Print-time")]
-        public decimal printtimemin { get; set; }
+        public decimal printtime { get; set; }
 
         [Display(Name = "in Minutes")]
         public bool isMinuit { get; set; } 
@@ -105,7 +105,7 @@ namespace FilamentCalculator.ViewModels
                                               / this.Filaments.First(c => c.FilamentId == this.SelectedFilament).SpoolWeight)
                 ) * missprintfactor;
             
-            var printtime = isMinuit?  printtimemin / 60 : printtimemin;
+            var printtime = isMinuit?  this.printtime / 60 : this.printtime;
             
             var energycosts = ((printtime *
                                 this.Printers.First(p => p.PrinterId == this.SelectedPrinter).EnergyConsumptionW) /
@@ -116,7 +116,7 @@ namespace FilamentCalculator.ViewModels
             
             this.energyCosts =  energycosts;
 
-            this.manufacturingCosts = (this.Settings.Hourlywage / 60) * this.manufacurworktime;
+            this.manufacturingCosts = decimal.Round((this.Settings.Hourlywage / 60) * this.manufacurworktime, 2);
             
             this.revenu = this.costs * Settings.Revenuepercentage;
 
