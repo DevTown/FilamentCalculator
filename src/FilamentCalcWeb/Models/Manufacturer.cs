@@ -14,8 +14,7 @@ namespace FilamentCalculator.Models
         {
             get
             {
-                return "";
+                return Url;}
             }
         }
     }
-}

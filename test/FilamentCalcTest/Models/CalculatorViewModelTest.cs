@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FilamentCalculator.Models;
+using FilamentCalculator.ViewModels;
 using NUnit.Framework;
 
 namespace FilamentCalcTest.Views
@@ -18,7 +19,20 @@ namespace FilamentCalcTest.Views
             
             testitem.Calculate();
             
-            Assert.That(testitem.costs, Is.EqualTo(2.5));
+            Assert.That(testitem.costs, Is.EqualTo(2.626M));
+        }
+
+        [Test]
+        public void TestCalcEnergy()
+        {
+             var testitem = GenerateTestViewModel();
+            testitem.weight = 100;
+            
+            Assert.That(testitem.energyCosts, Is.EqualTo(0));
+            
+            testitem.Calculate();
+            
+            Assert.That(testitem.energyCosts, Is.EqualTo(0.126M));
         }
 
         [Test]
@@ -40,7 +54,7 @@ namespace FilamentCalcTest.Views
 
         private CalculatorViewModel GenerateTestViewModel()
         {
-            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1};
+            var testitem = new CalculatorViewModel {weight = 0, lengthmm = 100, SelectedFilament = 1, printtimemin=120 };
 
             var filaments = new List<Filament>
             {
@@ -48,7 +62,7 @@ namespace FilamentCalcTest.Views
             };
             testitem.Filaments = filaments;
 
-            var settings = new Settings {PrinterEnergyUsageW = 300, Energiekosts = (decimal)0.21};
+            var settings = new Settings {Energiekosts = (decimal)0.21};
 
             testitem.Settings = settings;
             

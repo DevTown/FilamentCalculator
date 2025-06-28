@@ -18,8 +18,10 @@ namespace FilamentCalculator.Models
         [DefaultValue(0.10)]
         public decimal PrinterDepricationKostsPerHour { get; set; }
         
-        public int PrinterEnergyUsageW { get; set; }
+        [DefaultValue(20.0)]
+        public decimal  Hourlywage { get; set; }
         
-        
+        [DefaultValue(1.00)]
+        public decimal  Revenuepercentage { get; set; }
     }
 }

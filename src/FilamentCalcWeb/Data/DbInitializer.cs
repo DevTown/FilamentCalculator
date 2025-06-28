@@ -40,10 +40,10 @@ namespace FilamentCalculator.Data
                 var ManufactorList = new Manufacturer[]
                 {
                     new Manufacturer {Name = "Material4Print", Url = "https://material4print.de"},
-                    new Manufacturer {Name = "DasFilament"},
-                    new Manufacturer {Name = "RedLine"},
-                    new Manufacturer {Name = "Extrudr"},
-                    new Manufacturer {Name = "Bavaria Filament"},
+                    new Manufacturer {Name = "DasFilament", Url = "https://dasfilament.de"},
+                    new Manufacturer {Name = "RedLine", Url = "https://www.redline-filament.com/"},
+                    new Manufacturer {Name = "Extrudr", Url = "https://www.extrudr.com/de/"},
+                    new Manufacturer {Name = "Bavaria Filament", Url = "https://www.bavaria-filaments.com/"},
                 };
 
                 foreach (var item in ManufactorList)
@@ -53,9 +53,45 @@ namespace FilamentCalculator.Data
 
                 context.SaveChanges();
             }
+            {
+                if (context.Printers.Any())
+                {
+                    return;
+                }
+
+                var printer = new Printer
+                {
+                    Name = "MK2.5",
+                    ManufacturerName = "Prusa",
+                    Price = 1000,
+                    EnergyConsumptionW = 300
+                };
+                context.Printers.Add(printer);
+                context.SaveChanges();
+            }
+            
+            {
+                if (context.Shipments.Any())
+                {
+                    return;
+                }
+
+                var shipment = new Shipment
+                {
+                    Name = "Nome",
+                    ShipmentOrg = "Selfe",
+                    Packagingprice = (decimal)0.0,
+                    FillerPrice = (decimal)0.0,
+                    LablePrice = (decimal)0.0,
+                    AddonItemPrice = (decimal)0.0
+                };
+                
+                context.Shipments.Add(shipment);
+                context.SaveChanges();
+            }
 
             {
-                if (context.Settingses.Any())
+                if (context.Settings.Any())
                 {
                     return; // DB has been seeded
                 }
@@ -64,12 +100,12 @@ namespace FilamentCalculator.Data
                 {
                     Energiekosts = (decimal) 0.24,
                     MissprintChance = 10,
-                    PrinterEnergyUsageW = 300,
-                    PrinterDepricationKostsPerHour = 5
-                    
+                    PrinterDepricationKostsPerHour = 5,
+                    Hourlywage = (decimal)20.0,
+                    Revenuepercentage = (decimal) 100.0,
                 };
 
-                context.Settingses.Add(setting);
+                context.Settings.Add(setting);
                 context.SaveChanges();
             }
             

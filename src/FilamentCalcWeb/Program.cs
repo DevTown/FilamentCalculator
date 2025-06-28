@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FilamentCalculator.Data;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,7 +21,9 @@ namespace FilamentCalculator
                 try
                 {
                     var context = services.GetRequiredService<FilamentCalcContext>();
+                    context.Database.Migrate();
                     DbInitializer.Initialize(context);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -36,7 +35,7 @@ namespace FilamentCalculator
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
