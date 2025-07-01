@@ -21,20 +21,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Filament" asp-action="Index">Filament</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Manufacturer" asp-action="Index">Manufacturer</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" 
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                Filament
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Filament" asp-action="Index">Filament</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="FilamentType" asp-action="Index">Filament Types</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-area="" asp-controller="Manufacturer" asp-action="Index">Manufacturer</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Printer" asp-action="Index">Printer</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Shipment" asp-action="Index">Shipment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="FilamentType" asp-action="Index">Filament Types</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
