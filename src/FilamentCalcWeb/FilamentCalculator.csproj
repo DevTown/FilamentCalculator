@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <LangVersion>10</LangVersion>
     <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>58a6c0b8-af32-49ec-9f13-6df5296824fd</UserSecretsId>

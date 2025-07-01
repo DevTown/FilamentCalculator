@@ -33,7 +33,7 @@ namespace FilamentCalculator.Controllers
                 calculatorViewModel.SelectedPrinter = viewmodel.SelectedPrinter;
                 calculatorViewModel.weight = viewmodel.weight;
                 calculatorViewModel.lengthmm = viewmodel.lengthmm;
-                calculatorViewModel.printtimemin = viewmodel.printtimemin;
+                calculatorViewModel.printtime = viewmodel.printtime;
                 calculatorViewModel.isMinuit = viewmodel.isMinuit;
                 calculatorViewModel.manufacurworktime = viewmodel.manufacurworktime;
                 calculatorViewModel.manufacturingTitle = viewmodel.manufacturingTitle;
