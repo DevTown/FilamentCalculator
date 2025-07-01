@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Filaments";
 }
-
-<a asp-area="" asp-controller=@nameof(Filament) asp-action="Edit" class="btn btn-outline-success my-2 my-sm-0">Add Filament</a>
+<p>
+    <a asp-area="" asp-controller=@nameof(Filament) asp-action="Edit" class="btn btn-outline-success my-2 my-sm-0">Add Filament</a>
+</p>
 
 <table class="table">
     <thead>
@@ -46,8 +47,8 @@
                 @Html.DisplayFor(modelItem => item.SpoolWeight)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.FilamentId}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.FilamentId})
+                <a asp-action="Edit" asp-route-id="@item.FilamentId" class="btn btn-outline-info btn-sm">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.FilamentId" class="btn btn-outline-danger btn-sm">Delete</a>
             </td>
         </tr>
     }

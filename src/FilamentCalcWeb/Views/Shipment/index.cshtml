@@ -4,7 +4,9 @@
     ViewData["Title"] = "Shipment";
     }
 
-    <a asp-area="" asp-controller=@nameof(Shipment) asp-action="Edit" class="btn btn-outline-success my-2 my-sm-0">Add Shipment</a>
+    <p>
+        <a asp-area="" asp-controller=@nameof(Shipment) asp-action="Edit" class="btn btn-outline-success my-2 my-sm-0">Add Shipment</a>
+    </p>
 
     <table class="table">
         <thead>
@@ -34,8 +36,9 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.ShipmentID}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.ShipmentID})
+                <a asp-action="Edit" asp-route-id="@item.ShipmentID" class="btn btn-outline-info btn-sm">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.ShipmentID" class="btn btn-outline-danger btn-sm">Delete</a>
+                @*@Html.ActionLink("Delete", "Delete", new {id = item.ShipmentID})*@
             </td>
         </tr>
         }
