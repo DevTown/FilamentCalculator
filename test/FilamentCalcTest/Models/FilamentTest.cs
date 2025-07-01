@@ -15,11 +15,18 @@ namespace FilamentCalcTest.Models
                 Name = "Testmanu",
                 ManufacturerId = -1,
             };
-
+            var filType = new FilamentType
+            {
+                Name = "Testtype"
+            };
+            
             testItem.Manufacturer = manufactu;
+            testItem.FilamentType = filType;
+            testItem.Price = 30;
+            testItem.SpoolWeight = 1000;
             testItem.Color = "MyColor";
 
-            Assert.That(testItem.Displayname, Is.EqualTo("Testmanu - MyColor - "));
+            Assert.That(testItem.Displayname, Is.EqualTo("Testmanu - Testtype - MyColor - 0,03 EUR/G"));
 
         }
     }
