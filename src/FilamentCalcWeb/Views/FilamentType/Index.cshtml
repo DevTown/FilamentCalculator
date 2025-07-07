@@ -1,0 +1,59 @@
+@model IEnumerable<FilamentCalculator.ViewModels.FilamentTypeViewModel>
+
+@{
+    ViewData["Title"] = "Filament Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-success my-2 my-sm-0">Add new type</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.IsInUse)
+                    {
+                        <span class="badge bg-info">In use</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Not used</span>
+                    }
+                </td>
+                <td>
+                    @if (!item.IsInUse)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.FilamentTypeId" class="btn btn-outline-danger btn-sm">Delete</a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger btn-sm" disabled title="Cannot be deleted because it is in use">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

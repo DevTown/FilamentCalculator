@@ -44,6 +44,16 @@
                 @Html.TextBoxFor(model => model.extendedmaterialcosts, new {@class = "form-control"})
             </div>
         </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                @Html.LabelFor(model => model.Shipments)
+                @Html.DropDownListFor(o => o.SelectedShipment,
+                    new SelectList(Model.Shipments, nameof(Shipment.ShipmentID), nameof(Shipment.Name)), "no shipment", new {@class = "form-control"})
+            </div>
+            <div class="col">
+            </div>
+            </div>
         <div class="row">
             <div class="col">
                 <br/>
@@ -108,18 +118,23 @@
                         <td>@Html.LabelFor(model => model.costs)</td>
                         <td>@Html.DisplayFor(model => model.costs) €</td>
                     </tr>
-                    <tr>
-                        <th scope="row">7</th>
-                        <td>@Html.LabelFor(model => model.revenu)</td>
-                        <td> @Html.DisplayFor(model => model.revenu) €</td>
-                    </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>@Html.LabelFor(model => model.revenu)</td>
+                <td> @Html.DisplayFor(model => model.revenu) €</td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>@Html.LabelFor(model => model.shippingcosts)</td>
+                <td> @Html.DisplayFor(model => model.shippingcosts) €</td>
+            </tr>
                     <tr>
                         <th scope="row">-</th>
                         <td>@Html.LabelFor(model => model.totalCosts)</td>
                         <td> @Html.DisplayFor(model => model.totalCosts) €</td>
                     </tr>
                     </tfoot>
-                </table>
+              </table>
             </div>
             @Html.LabelFor(model => model.manufacturingTitle)
             @Html.TextBoxFor(model => model.manufacturingTitle,new { @class = "form-control", @id = "manufacturingTitle" })

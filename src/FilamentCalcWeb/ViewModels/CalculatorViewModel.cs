@@ -12,9 +12,9 @@ namespace FilamentCalculator.ViewModels
     {
         public IEnumerable<FilamentType> Filamenttypes { get; set; }
         
-        public IEnumerable<Shipment> Shipments { get; set; }
-        
         public int? SelectedShipment { get; set; }
+
+        public IEnumerable<Shipment> Shipments { get; set; }
         public IEnumerable<Filament> Filaments { get; set; }
 
         [Required(ErrorMessage = "You have to select a Filament from the list.")]
@@ -48,12 +48,15 @@ namespace FilamentCalculator.ViewModels
         
         
         private FilamentCalcContext _context;
+        
+        [Display(Name = "Shipping-costs")] 
+        public decimal shippingcosts { get; private set; }
 
         [Display(Name = "Printing-costs")] 
         public decimal costs => this.energyCosts + this.filamentCosts + this.manufacturingCosts + this.printerCosts+ this.extendedmaterialcosts;
         
         [Display(Name = "Total costs ")]
-        public decimal totalCosts => this.costs + this.revenu;
+        public decimal totalCosts => this.costs + this.revenu + this.shippingcosts;
         
         [Display(Name = "Revenu ")]
         public decimal revenu { get; set; }
@@ -119,17 +122,23 @@ namespace FilamentCalculator.ViewModels
             this.manufacturingCosts = decimal.Round((this.Settings.Hourlywage / 60) * this.manufacurworktime, 2);
             
             this.revenu = this.costs * Settings.Revenuepercentage;
+            
+            if (SelectedShipment > 0)
+            {
+                var shipment = _context.Shipments.Find(SelectedShipment);
+                if (shipment != null)
+                {
+                    shippingcosts = shipment.TotalPrice;
+                }
+                else
+                {
+                    shippingcosts = 0;
+                }
+            }
 
-        }
- 
 
-
-public void GetWeight()
-        {
-            if (this.weight != 0 || this.lengthmm <= 0) return;
-            var filamentdiameter = this.Filaments.First(c => c.FilamentId == this.SelectedFilament).Diameter / 10;
-            var i = ( filamentdiameter / 2 ) * ( filamentdiameter / 2 )  * 3.14 * (double) (this.lengthmm / 10) * 1.25;
-            this.weight = Decimal.Round((decimal)i,3);
         }
     }
+    
 }
+        

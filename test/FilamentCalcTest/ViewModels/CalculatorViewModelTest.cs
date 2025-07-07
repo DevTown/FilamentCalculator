@@ -36,22 +36,7 @@ namespace FilamentCalcTest.ViewModels
             Assert.That(testitem.energyCosts, Is.EqualTo(0.756m));
         }
 
-        [Test]
-        public void TestGetWeight()
-        {
-            var testitem = GenerateTestViewModel();
-
-
-            Assert.That(testitem.weight, Is.EqualTo(0));
-            Assert.That(testitem.lengthmm, Is.EqualTo(100));
-
-            testitem.GetWeight();
-
-            
-            Assert.That(testitem.weight, Is.EqualTo(0.301));
-            Assert.That(testitem.lengthmm, Is.EqualTo(100));
-
-        }
+       
 
         [Test]
         public void TestFalschSzenarien()
@@ -64,14 +49,7 @@ namespace FilamentCalcTest.ViewModels
             // Kosten sollten trotz negativem Gewicht berechnet werden (könnte ein Bug sein)
             Assert.That(testitem1.filamentCosts, Is.LessThan(0), "Negative Gewichtswerte sollten negative Filamentkosten ergeben");
             
-            // Test 2: Null oder 0 Länge
-            var testitem2 = GenerateTestViewModel();
-            testitem2.lengthmm = 0;
-            testitem2.GetWeight();
-            
-            // Gewicht sollte 0 bleiben wenn Länge 0 ist
-            Assert.That(testitem2.weight, Is.EqualTo(0), "Bei Länge 0 sollte das Gewicht 0 bleiben");
-            
+           
             // Test 3: Sehr große Werte
             var testitem3 = GenerateTestViewModel();
             testitem3.weight = 1000000; // 1 Tonne
@@ -109,33 +87,7 @@ namespace FilamentCalcTest.ViewModels
             Assert.That(testitem6.costs, Is.LessThan(1), "Sehr kleine Werte sollten sehr kleine Kosten ergeben");
         }
 
-        [Test]
-        public void TestGetWeightWithValidLength()
-        {
-            var testitem = GenerateTestViewModel();
-            testitem.weight = 0;
-            testitem.lengthmm = 1000; // 1 Meter
-            
-            testitem.GetWeight();
-            
-            // Gewicht sollte berechnet werden basierend auf Filament-Durchmesser
-            Assert.That(testitem.weight, Is.GreaterThan(0), "Gewicht sollte bei gültiger Länge berechnet werden");
-            Assert.That(testitem.weight, Is.LessThan(10), "Gewicht sollte realistisch sein");
-        }
-
-        [Test]
-        public void TestGetWeightWithNonZeroWeight()
-        {
-            var testitem = GenerateTestViewModel();
-            testitem.weight = 50; // Bereits gesetztes Gewicht
-            testitem.lengthmm = 100;
-            
-            testitem.GetWeight();
-            
-            // Gewicht sollte unverändert bleiben, da bereits gesetzt
-            Assert.That(testitem.weight, Is.EqualTo(50), "Gewicht sollte unverändert bleiben wenn bereits gesetzt");
-        }
-
+        
         [Test]
         public void TestCalculateWithManufacturingWork()
         {
