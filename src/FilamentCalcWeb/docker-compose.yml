@@ -7,6 +7,18 @@ services:
       POSTGRES_PASSWORD: example
     ports:
      - "5433:5432"
+    networks:
+      - internal-network
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data    # Diese Zeile hinzufügen
+
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U app_user -d filamentcalc" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
 
   web:
     image: devtown.filamentcalc 
@@ -18,10 +30,19 @@ services:
       PGDB: filamentcalc
       PGUsername: postgres
       PGPassword: example
+      ASPNETCORE_URLS: http://+:8080
       #SeedDemoData: J
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-      - "5000:80"
-      - "5001:443"
+      - "8080:8080"
     depends_on:
-      - "db"
+      db:
+        condition: service_healthy
+    networks:
+      - internal-network
+    restart: unless-stopped
+
+networks:
+  internal-network:
+    driver: bridge
+    internal: false  # ASP.NET App braucht Internet-Zugang für Updates etc.
