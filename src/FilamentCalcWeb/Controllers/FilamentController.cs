@@ -11,9 +11,14 @@ namespace FilamentCalculator.Controllers
 {
     public class FilamentController : Controller
     {
-        private readonly FilamentCalcContext _db = new FilamentCalcContext();
-        
-        // GET
+        private readonly FilamentCalcContext _db;
+    
+    public FilamentController(FilamentCalcContext context)
+    {
+        _db = context;
+    }
+    
+    // GET
         public IActionResult Index()
         {
             return View(_db.Filaments.Include(nameof(Manufacturer)).Include(nameof(FilamentType)).ToList());

@@ -11,7 +11,7 @@ namespace FilamentCalculator.Controllers;
 public class PrinterController: Controller
 {
     
-    private readonly FilamentCalcContext _db = new FilamentCalcContext();
+    private readonly FilamentCalcContext _db = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
     
     // GET
     public IActionResult Index()

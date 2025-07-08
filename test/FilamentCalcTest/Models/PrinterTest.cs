@@ -20,7 +20,7 @@ namespace FilamentCalcTest.Models
             var costPerHour = printer.AmotationCostPerHour;
 
             // Assert
-            Assert.AreEqual(2.0m, costPerHour);
+            Assert.That(2.0m, Is.EqualTo(costPerHour));
         }
 
         [Test]
@@ -39,13 +39,13 @@ namespace FilamentCalcTest.Models
             };
 
             // Assert
-            Assert.AreEqual(1, printer.PrinterId);
-            Assert.AreEqual("TestPrinter", printer.Name);
-            Assert.AreEqual("TestManufacturer", printer.ManufacturerName);
-            Assert.AreEqual(500, printer.Price);
-            Assert.AreEqual(250, printer.PeriotOfAmortisation);
-            Assert.AreEqual(1.75f, printer.FilamentDiameter);
-            Assert.AreEqual(120, printer.EnergyConsumptionW);
+            Assert.That(1,Is.EqualTo(printer.PrinterId));
+            Assert.That("TestPrinter", Is.EqualTo(printer.Name));
+            Assert.That("TestManufacturer", Is.EqualTo(printer.ManufacturerName));
+            Assert.That(500, Is.EqualTo(printer.Price));
+            Assert.That(250, Is.EqualTo(printer.PeriotOfAmortisation));
+            Assert.That(1.75f, Is.EqualTo(printer.FilamentDiameter));
+            Assert.That(120, Is.EqualTo(printer.EnergyConsumptionW));
         }
 
         [Test]
@@ -62,4 +62,4 @@ namespace FilamentCalcTest.Models
             Assert.Throws<System.DivideByZeroException>(() => { var _ = printer.AmotationCostPerHour; });
         }
     }
-} 
+}

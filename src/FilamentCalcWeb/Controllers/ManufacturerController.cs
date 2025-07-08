@@ -10,7 +10,7 @@ namespace FilamentCalculator.Controllers
 {
     public class ManufacturerController :Controller
     {
-        private readonly FilamentCalcContext _db = new FilamentCalcContext();
+        private readonly FilamentCalcContext _db = new FilamentCalcContext(new DbContextOptions<FilamentCalcContext>());
         
         public IActionResult Index()
         {
