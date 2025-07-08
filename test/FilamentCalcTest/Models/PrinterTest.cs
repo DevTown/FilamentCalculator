@@ -1,96 +1,65 @@
-using FilamentCalculator.Data;
 using FilamentCalculator.Models;
-using FilamentCalculator.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace FilamentCalcTest.Models
 {
     [TestFixture]
-    public class PrinterViewModelTests
+    public class PrinterTest
     {
-        private FilamentCalcContext _context;
-        private DbContextOptions<FilamentCalcContext> _options;
-
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void AmotationCostPerHour_CorrectCalculation()
         {
-            _options = new DbContextOptionsBuilder<FilamentCalcContext>()
-                .UseInMemoryDatabase(databaseName: "TestPrinterDb")
-                .Options;
+            // Arrange
+            var printer = new Printer
+            {
+                Price = 1000,
+                PeriotOfAmortisation = 500m
+            };
 
-            _context = new FilamentCalcContext(_options);
-            
-            // Testdaten vorbereiten
+            // Act
+            var costPerHour = printer.AmotationCostPerHour;
+
+            // Assert
+            Assert.That(2.0m, Is.EqualTo(costPerHour));
+        }
+
+        [Test]
+        public void Properties_AreSetAndGetCorrectly()
+        {
+            // Arrange
             var printer = new Printer
             {
                 PrinterId = 1,
                 Name = "TestPrinter",
                 ManufacturerName = "TestManufacturer",
-                Price = 1000,
-                EnergyConsumptionW = 300,
-                PeriotOfAmortisation = 5000
+                Price = 500,
+                PeriotOfAmortisation = 250,
+                FilamentDiameter = 1.75f,
+                EnergyConsumptionW = 120
             };
-            _context.Printers.Add(printer);
-            _context.SaveChanges();
+
+            // Assert
+            Assert.That(1,Is.EqualTo(printer.PrinterId));
+            Assert.That("TestPrinter", Is.EqualTo(printer.Name));
+            Assert.That("TestManufacturer", Is.EqualTo(printer.ManufacturerName));
+            Assert.That(500, Is.EqualTo(printer.Price));
+            Assert.That(250, Is.EqualTo(printer.PeriotOfAmortisation));
+            Assert.That(1.75f, Is.EqualTo(printer.FilamentDiameter));
+            Assert.That(120, Is.EqualTo(printer.EnergyConsumptionW));
         }
 
         [Test]
-        public void PrinterViewModel_DefaultConstructor_CreatesEmptyPrinter()
+        public void AmotationCostPerHour_DivideByZero_ReturnsInfinity()
         {
-            // Arrange & Act
-            var viewModel = new PrinterViewModel();
+            // Arrange
+            var printer = new Printer
+            {
+                Price = 1000,
+                PeriotOfAmortisation = 0m
+            };
 
-            // Assert
-            Assert.That(viewModel.Printer, Is.Not.Null);
-            Assert.That(viewModel.Printer.Name, Is.Null);
-        }
-
-        [Test]
-        public void PrinterViewModel_ContextConstructor_CreatesEmptyPrinter()
-        {
-            // Arrange & Act
-            var viewModel = new PrinterViewModel(_context);
-
-            // Assert
-            Assert.That(viewModel.Printer, Is.Not.Null);
-            Assert.That(viewModel.Printer.Name, Is.Null);
-        }
-
-        [Test]
-        public void PrinterViewModel_IdConstructor_LoadsExistingPrinter()
-        {
-            // Arrange & Act
-            var viewModel = new PrinterViewModel(1, _context);
-
-            // Assert
-            Assert.That(viewModel.Printer, Is.Not.Null);
-            Assert.That(viewModel.Printer.Name, Is.EqualTo("TestPrinter"));
-            Assert.That(viewModel.Printer.ManufacturerName, Is.EqualTo("TestManufacturer"));
-            Assert.That(viewModel.Printer.Price, Is.EqualTo(1000));
-            Assert.That(viewModel.Printer.EnergyConsumptionW, Is.EqualTo(300));
-            Assert.That(viewModel.Printer.PeriotOfAmortisation, Is.EqualTo(5000));
-        }
-
-        [Test]
-        public void PrinterViewModel_DiameterList_ContainsCorrectValues()
-        {
-            // Arrange & Act
-            var viewModel = new PrinterViewModel();
-
-            // Assert
-            Assert.That(viewModel.DiameterList, Is.Not.Null);
-            Assert.That(viewModel.DiameterList.Count, Is.EqualTo(2));
-            Assert.That(viewModel.DiameterList[0].Value, Is.EqualTo("1,75"));
-            Assert.That(viewModel.DiameterList[0].Text, Is.EqualTo("1.75"));
-            Assert.That(viewModel.DiameterList[1].Value, Is.EqualTo("2,85"));
-            Assert.That(viewModel.DiameterList[1].Text, Is.EqualTo("2.85"));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _context.Database.EnsureDeleted();
+            // Act & Assert
+            Assert.Throws<System.DivideByZeroException>(() => { var _ = printer.AmotationCostPerHour; });
         }
     }
 }
