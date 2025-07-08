@@ -61,10 +61,11 @@ namespace FilamentCalculator.Data
 
                 var printer = new Printer
                 {
-                    Name = "MK2.5",
+                    Name = "CoreOne",
                     ManufacturerName = "Prusa",
                     Price = 1000,
-                    EnergyConsumptionW = 300
+                    EnergyConsumptionW = 300,
+                    PeriotOfAmortisation = 5000
                 };
                 context.Printers.Add(printer);
                 context.SaveChanges();

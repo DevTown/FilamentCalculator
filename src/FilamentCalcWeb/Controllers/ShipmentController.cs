@@ -9,7 +9,7 @@ namespace FilamentCalculator.Controllers;
 
 public class ShipmentController:Controller
 {
-    private readonly FilamentCalcContext _db = new();
+    private readonly FilamentCalcContext _db = new(new DbContextOptions<FilamentCalcContext>());
         
     public IActionResult Index()
     {
