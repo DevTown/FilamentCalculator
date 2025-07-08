@@ -19,9 +19,11 @@ namespace FilamentCalculator.Controllers
         [HttpPost]
         public IActionResult Index(SettingsViewModel viewModel)
         {
-            var settingItem = _db.Settings.First();
-            if (settingItem != null)
+            
+            if (_db.Settings.Any())
             {
+                var settingItem = _db.Settings.FirstOrDefault();
+                
                 settingItem.Energiekosts = viewModel.Energiekosts;
                 settingItem.MissprintChance = viewModel.MissprintChance;
                 settingItem.PrinterDepricationKostsPerHour = viewModel.PrinterDepricationKostsPerHour;
