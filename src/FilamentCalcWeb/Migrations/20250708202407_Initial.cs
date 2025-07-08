@@ -17,9 +17,8 @@ namespace FilamentCalculator.Migrations
                 {
                     FilamentTypeId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    WeightPerMM = table.Column<float>(type: "real", nullable: false),
-                    Usage = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    WeightPerMM = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,8 +31,8 @@ namespace FilamentCalculator.Migrations
                 {
                     ManufacturerId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Url = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,9 +45,10 @@ namespace FilamentCalculator.Migrations
                 {
                     PrinterId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    ManufacturerName = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    ManufacturerName = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
+                    PeriotOfAmortisation = table.Column<decimal>(type: "numeric", nullable: false),
                     FilamentDiameter = table.Column<float>(type: "real", nullable: false),
                     EnergyConsumptionW = table.Column<decimal>(type: "numeric", nullable: false)
                 },
@@ -66,11 +66,31 @@ namespace FilamentCalculator.Migrations
                     Energiekosts = table.Column<decimal>(type: "numeric", nullable: false),
                     MissprintChance = table.Column<int>(type: "integer", nullable: false),
                     PrinterDepricationKostsPerHour = table.Column<decimal>(type: "numeric", nullable: false),
-                    Hourlywage = table.Column<decimal>(type: "numeric", nullable: false)
+                    Hourlywage = table.Column<decimal>(type: "numeric", nullable: false),
+                    Revenuepercentage = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Settings", x => x.SettingsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shipments",
+                columns: table => new
+                {
+                    ShipmentID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    ShipmentOrg = table.Column<string>(type: "text", nullable: true),
+                    Packagingprice = table.Column<decimal>(type: "numeric", nullable: false),
+                    FillerPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    LablePrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    AddonItemPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    ShippingPrice = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipments", x => x.ShipmentID);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,12 +101,12 @@ namespace FilamentCalculator.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FilamentTypeId = table.Column<int>(type: "integer", nullable: false),
                     ManufacturerId = table.Column<int>(type: "integer", nullable: false),
-                    Color = table.Column<string>(type: "text", nullable: false),
+                    Color = table.Column<string>(type: "text", nullable: true),
                     Diameter = table.Column<float>(type: "real", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     SpoolWeight = table.Column<float>(type: "real", nullable: false),
-                    PrintTempNozzle = table.Column<string>(type: "text", nullable: false),
-                    PrintTempBed = table.Column<string>(type: "text", nullable: false)
+                    PrintTempNozzle = table.Column<string>(type: "text", nullable: true),
+                    PrintTempBed = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,6 +147,9 @@ namespace FilamentCalculator.Migrations
 
             migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "Shipments");
 
             migrationBuilder.DropTable(
                 name: "FilamentTypes");

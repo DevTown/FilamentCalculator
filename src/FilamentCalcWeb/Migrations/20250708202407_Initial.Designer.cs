@@ -11,15 +11,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FilamentCalculator.Migrations
 {
     [DbContext(typeof(FilamentCalcContext))]
-    [Migration("20241130103148_Update 1")]
-    partial class Update1
+    [Migration("20250708202407_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -123,6 +123,9 @@ namespace FilamentCalculator.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<decimal>("PeriotOfAmortisation")
+                        .HasColumnType("numeric");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
@@ -151,9 +154,46 @@ namespace FilamentCalculator.Migrations
                     b.Property<decimal>("PrinterDepricationKostsPerHour")
                         .HasColumnType("numeric");
 
+                    b.Property<decimal>("Revenuepercentage")
+                        .HasColumnType("numeric");
+
                     b.HasKey("SettingsId");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("FilamentCalculator.Models.Shipment", b =>
+                {
+                    b.Property<int>("ShipmentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ShipmentID"));
+
+                    b.Property<decimal>("AddonItemPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("FillerPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("LablePrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Packagingprice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("ShipmentOrg")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("ShippingPrice")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("ShipmentID");
+
+                    b.ToTable("Shipments");
                 });
 
             modelBuilder.Entity("FilamentCalculator.Models.Filament", b =>

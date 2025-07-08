@@ -49,6 +49,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<FilamentCalcContext>();
+        context.Database.EnsureCreated();
         context.Database.Migrate();
         DbInitializer.Initialize(context);
     }
